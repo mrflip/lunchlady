@@ -1,0 +1,54 @@
+User
+  name
+  email
+  --
+  has_many :orders
+  has_many :meals, :through => orders
+  has_many :votes
+  --
+  todays_meal
+
+restaurant
+  phone number
+  main url
+  meal form URL
+  address
+  tags
+  --
+  has_many :meals
+  has_many :orders, :through => meals
+
+order
+  restaurant_id
+  belongs_to :restaurant
+  has_many :orders
+  has_many :users, :through => :orders
+
+meal
+  user_id
+  meal_id
+  description
+  price
+  copay
+  guest_of
+  created_by
+  created_at
+  --
+  belongs_to :user
+  belongs_to :meal
+  has_one :restaurant, :through => :meal
+
+restaurant tags
+  tags
+  delivers
+  delivery_fee
+  tip_percent
+  discount_percent
+
+  restaurant inspection link
+  yelp link
+  
+user
+  is_guest
+
+  

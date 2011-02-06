@@ -1,6 +1,6 @@
-- freeze_user_id ||= false
+- freeze_user_id    ||= false
+- hide_link_to_meal ||= false
 - orderer_str = case when freeze_user_id && user_signed_in? && (@order.user_id == current_user.id) then " for you" when freeze_user_id && @order.user then " for " + @order.user.name else "" end
-- flash[:notice] = raw("You have a current order for this meal -- #{link_to "click here", [@meal, @current_user_order]} to edit it") if @current_user_order
 
 = form_for [@meal, @order] do |f|
   %fieldset.order
@@ -21,7 +21,8 @@
     .buttons
       = f.submit
       .right
-        = link_to "View all orders for this meal",   @meal
-        - if not @order.new_record?
-          &middot;
+        - unless hide_link_to_meal
+          = link_to "View all orders for this meal", @meal
+        - unless @order.new_record?
+          = raw("&middot;") unless hide_link_to_meal
           = link_to "Delete this order", [@meal, @order], :confirm => 'Are you sure?', :method => :delete 

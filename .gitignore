@@ -39,7 +39,7 @@ pkg
 *private*
 .bundle
 db/*.sqlite3
-log/*.log
+log/*.log*
 tmp/**/*
 config/database.yml
 public/stylesheets/compiled/*

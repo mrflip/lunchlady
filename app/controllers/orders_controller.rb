@@ -19,10 +19,7 @@ class OrdersController < ApplicationController
     if params[:user_id].present? && (@order = Order.for_meal_and_user(@meal, params[:user_id]))
       render :action => 'edit'
     else
-      if user_signed_in?
-        @current_user_order = Order.for_meal_and_user(@meal, current_user.id)
-        params[:user_id] ||= current_user.id if @current_user_order.blank?
-      end
+      params[:user_id] ||= current_user.id if user_signed_in?
       @order = Order.new(params.merge :meal_id => @meal.id)
     end
   end

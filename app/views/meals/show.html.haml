@@ -1,15 +1,34 @@
-- title "Meal"
+- title @meal.titleize
 
-%p
-  %strong Ordered On:
-  = @meal.ordered_on
-%p
-  %strong Restaurant:
-  = @meal.restaurant_id
+%h2
+  = @meal.titleize
+  from 
+  = link_to_rsrc @meal.restaurant
+  == ~~ 
+  %span= link_to 'website', @meal.restaurant.url
+  &middot;
+  %span= link_to 'menu',    @meal.restaurant.menu_url
+  &middot;
+  %span= link_to 'review',  @meal.restaurant.review_url
 
-%p
-  = link_to "Edit", edit_meal_path(@meal)
-  |
-  = link_to "Destroy", @meal, :confirm => 'Are you sure?', :method => :delete
-  |
-  = link_to "View All", meals_path
+%hr/
+
+%table.orders
+  - User.orderers_for(@meal).each do |user|
+    - order = @meal.orders.for_user(user).first 
+    %tr
+      %td.user=          link_to_rsrc user
+      - if order
+        %td.price=       number_to_currency(order.price)
+        %td=             link_to 'edit', edit_order_path(order)
+        %td.description= order.description
+      - else
+        %td.price        &nbsp;
+        %td=             link_to 'place order', new_order_path(order)
+        %td              &nbsp;
+
+%hr.spacer/
+
+.buttons
+  = link_to "Change restaurant", edit_meal_path(@meal), :class => 'button small white grid_4'
+  %span  (will remove all orders)

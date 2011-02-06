@@ -1,12 +1,8 @@
-= form_for meal do |f|
-  = f.error_messages
-  %p
-    = f.label :ordered_on
-    %br
-    = f.date_select :ordered_on
-  %p
-    = f.label :restaurant_id
-    %br
-    = f.text_field :restaurant_id
-  %p
-    = f.submit
+= form_for @meal do |f|
+  %fieldset
+    = f.error_messages
+    %legend= @title
+    .form_input
+      = f.label :restaurant_id
+      = f.select("restaurant_id", Restaurant.alphabetically.map{|r| [ r.name, r.id ] }, {:prompt => '-- (restaurant) --'})
+    .buttons= f.submit

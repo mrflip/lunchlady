@@ -3,6 +3,4 @@
 = render 'form'
 
 %p
-  = link_to "Show", meal
-  |
-  = link_to "View All", meals_path
+  = link_to "Back to meal", meal_path(@meal) if @meal.restaurant

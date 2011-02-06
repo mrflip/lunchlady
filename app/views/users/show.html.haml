@@ -1,0 +1,25 @@
+- title "Users"
+
+%table.vertical.user
+  %tr
+    %th         Name
+    %td.td_12=  @user.name
+  %tr
+    %th         Email
+    %td=        @user.email
+  %tr
+    %th         Local?
+    %td=        @user.is_local ? "Works in office" : "Only occasionally orders"
+
+%table.horizontal.orders
+  %tr
+    %th.td_3    Date
+    %th.td_4    Restaurant
+    %th.td_17   Order
+  - @user.orders.each do |order|
+    %tr
+      %td= order.meal.ordered_on_str
+      %td= order.meal.restaurant.titleize if order.meal.restaurant
+      %td= order.description
+      
+      

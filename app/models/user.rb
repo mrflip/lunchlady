@@ -8,7 +8,22 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :name, :username, :is_local
 
+  has_many :orders
+  has_many :meals,      :through => :orders
+  has_many :restaurants, :through => :orders
+  scope :local, lambda{ where('(users.is_local IS NOT NULL)') }
+
+  validates :name,  :presence => true, :length => {:minimum => 1, :maximum => 100}
+
+  def self.orderers_for meal
+    [local, all(:joins => :orders, :conditions => ['orders.meal_id = ?', meal.id])].flatten.uniq
+  end
+
   def titleize
     name
+  end
+
+  def current_meal
+    orders.first(:conditions => { :meal_id => Meal.current.id })
   end
 end

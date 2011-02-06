@@ -1,45 +1,42 @@
 - title "Restaurant"
 
-%p
-  %strong Name:
-  = @restaurant.name
-%p
-  %strong Phone:
-  = @restaurant.phone
-%p
-  %strong Url:
-  = @restaurant.url
-%p
-  %strong Menu Url:
-  = @restaurant.menu_url
-%p
-  %strong Address:
-  = @restaurant.address
-%p
-  %strong Note:
-  = @restaurant.note
-%p
-  %strong Delivers:
-  = @restaurant.delivers
-%p
-  %strong Delivery Fee:
-  = @restaurant.delivery_fee
-%p
-  %strong Tip Percent:
-  = @restaurant.tip_percent
-%p
-  %strong Discount Percent:
-  = @restaurant.discount_percent
-%p
-  %strong Inspection Url:
-  = @restaurant.inspection_url
-%p
-  %strong Review Url:
-  = @restaurant.review_url
+%table.vertical.restaurant
+  %tr
+    %th         Name
+    %td.td_12=  @restaurant.name
+  %tr
+    %th         Phone
+    %td=        @restaurant.phone
+  %tr
+    %th=        link_to "Homepage", @restaurant.url
+    %td=        link_to @restaurant.url, @restaurant.url
+  %tr
+    %th=        link_to "Menu", @restaurant.menu_url
+    %td=        link_to @restaurant.menu_url, @restaurant.menu_url
+  %tr
+    %th=        link_to "Review", @restaurant.review_url
+    %td=        link_to @restaurant.review_url, @restaurant.review_url
+  %tr
+    %th         Address
+    %td=        @restaurant.address
+  %tr
+    %th         Delivers
+    %td=        @restaurant.delivers
+  - if @restaurant.delivery_fee.to_f > 0
+    %tr
+      %th       Delivery Fee
+      %td=      @restaurant.delivery_fee
+  - if @restaurant.tip_percent.to_i > 0
+    %tr
+      %th       Tip Percent
+      %td=      @restaurant.tip_percent
+  - if @restaurant.discount_percent.to_i > 0
+    %tr
+      %th       Discount Percent
+      %td=      @restaurant.discount_percent
+  %tr
+    %th         Notes
+    %td=        @restaurant.note
 
-%p
-  = link_to "Edit", edit_restaurant_path(@restaurant)
-  |
-  = link_to "Destroy", @restaurant, :confirm => 'Are you sure?', :method => :delete
-  |
-  = link_to "View All", restaurants_path
+.buttons
+  = link_to "Edit Restaurant Info", edit_restaurant_path(@restaurant), :class => :button

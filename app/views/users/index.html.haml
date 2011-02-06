@@ -6,6 +6,6 @@
     %th Is local
   - for user in @users
     %tr
-      %td= user.name
+      %td= link_to_rsrc user
       %td= user.is_local
 

@@ -25,11 +25,13 @@ File.open(File.join(Rails.root,"/db/seeds/restaurants.tsv")) do |seed_file|
   end
 end
 
-USER_FIELDS = [:id, :username, :email, :name, :local]
+USER_FIELDS = [:id, :username, :email, :name, :is_local]
 File.open(File.join(Rails.root,"/db/seeds/users.tsv")) do |seed_file|
   seed_file.each do |line|
     values = line.strip.split("\t").map(&:strip)
     fields = Hash.zip(USER_FIELDS, values)
+    fields.delete :username
+    fields.merge! :password => 'foobar', :password_confirmation => 'foobar'
     u = User.find_or_create_by_id fields[:id]
     u.update_attributes fields
   end
@@ -37,22 +39,21 @@ end
 
 all_restaurants = Restaurant.all.to_a
 (-2 .. 10).each do |offset|
-  order = Order.for_date(Date.today + offset)
+  meal = Meal.for_date(Date.today + offset)
   if (rand(10) <= 5)
     r = all_restaurants.random
-    order.restaurant = r
-    order.save!
+    meal.restaurant = r
+    meal.save!
   end
 end
 
-
 all_users  = User.all.to_a
-Order.all.each do |order|
+Meal.all.each do |meal|
   (3 + rand(3)).times do
     user = all_users.random
-    meal = Meal.find_or_create_by_order_id_and_user_id(order.id, user.id)
-    meal.description = %w[dog cat horse pig elephant].random
-    meal.price       = 6.50 + rand(5.0)
-    meal.save!
+    order = Order.find_or_create_by_meal_id_and_user_id(meal.id, user.id)
+    order.description = %w[dog cat horse pig elephant].random
+    order.price       = 6.50 + rand(5.0)
+    order.save!
   end
 end

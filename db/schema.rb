@@ -10,7 +10,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110206121908) do
+ActiveRecord::Schema.define(:version => 6) do
+
+  create_table "meals", :force => true do |t|
+    t.date     "ordered_on"
+    t.integer  "restaurant_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "meals", ["ordered_on"], :name => "index_meals_on_ordered_on", :unique => true
+
+  create_table "orders", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "meal_id"
+    t.text     "description"
+    t.float    "price"
+    t.float    "copay"
+    t.integer  "guest_of"
+    t.integer  "created_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "orders", ["user_id", "meal_id"], :name => "index_orders_on_user_id_and_meal_id", :unique => true
 
   create_table "restaurants", :force => true do |t|
     t.string   "name"
@@ -28,6 +51,8 @@ ActiveRecord::Schema.define(:version => 20110206121908) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "restaurants", ["name"], :name => "index_restaurants_on_name", :unique => true
 
   create_table "slugs", :force => true do |t|
     t.string   "name"

@@ -1,0 +1,25 @@
+- title "Orders"
+
+%table
+  %tr
+    %th User
+    %th Order
+    %th Description
+    %th Price
+    %th Copay
+    %th Guest of
+    %th Created by
+  - for order in @orders
+    %tr
+      %td= order.user_id
+      %td= order.order_id
+      %td= order.description
+      %td= order.price
+      %td= order.copay
+      %td= order.guest_of
+      %td= order.created_by
+      %td= link_to 'Show', order
+      %td= link_to 'Edit', edit_order_path(order)
+      %td= link_to 'Destroy', order, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Order", new_order_path(order)

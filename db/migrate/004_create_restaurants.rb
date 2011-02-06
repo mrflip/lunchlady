@@ -15,6 +15,7 @@ class CreateRestaurants < ActiveRecord::Migration
       t.string :review_url
       t.timestamps
     end
+    add_index :restaurants, [:name], :unique => true
   end
 
   def self.down

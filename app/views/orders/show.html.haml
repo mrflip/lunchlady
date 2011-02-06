@@ -1,0 +1,30 @@
+- title "Order"
+
+%p
+  %strong User:
+  = @order.user_id
+%p
+  %strong Order:
+  = @order.order_id
+%p
+  %strong Description:
+  = @order.description
+%p
+  %strong Price:
+  = @order.price
+%p
+  %strong Copay:
+  = @order.copay
+%p
+  %strong Guest Of:
+  = @order.guest_of
+%p
+  %strong Created By:
+  = @order.created_by
+
+%p
+  = link_to "Edit", edit_order_path(@order)
+  |
+  = link_to "Destroy", @order, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", orders_path

@@ -1,31 +1,51 @@
 source 'http://rubygems.org'
-
 gem 'rails', '3.0.3'
+gem 'unicorn'
+# Database
+group :development, :test do
+  gem 'sqlite3-ruby', :require => 'sqlite3'
+end
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+# HTML and CSS replacement
+gem 'haml', '~> 3.0'
+gem 'haml-rails'
+gem 'compass'
+gem 'html5-boilerplate'
+gem 'compass-960-plugin'
 
-gem 'sqlite3-ruby', :require => 'sqlite3'
+# Development
+gem 'friendly_id', '~> 3.1'         # Human readable URLs
+gem 'validates_existence', '~> 0.5' # Validation of associations
 
-# Use unicorn as the web server
-# gem 'unicorn'
+gem 'chronic'                       # Time parsing
+gem 'will_paginate', '~> 3.0.pre2'  # Pagination of long lists
+gem 'devise', '~> 1.1'            # User management
+gem 'hpricot'                     # For Devise view generation
+gem 'ruby_parser'                 # For Devise view generation
 
-# Deploy with Capistrano
-# gem 'capistrano'
+# Testing
+group :test do
+  gem 'rspec'
+  gem 'rspec-rails'
+  # gem "mocha"
+  gem 'rcov'
+  gem 'forgery'
+end
 
-# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
-# gem 'ruby-debug'
-# gem 'ruby-debug19'
+group :development do
+  gem 'nifty-generators'            # Much better scaffolding
+  gem 'taps'                        # Teleportation of databases
+  # platforms :ruby_19 do
+  #   gem 'ruby-debug19'
+  # end
+  # platforms :ruby_18 do
+  #   gem 'ruby-debug'
+  # end
+end
 
-# Bundle the extra gems:
-# gem 'bj'
-# gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
-# gem 'aws-s3', :require => 'aws/s3'
-
-# Bundle gems for the local environment. Make sure to
-# put test-only gems in this group so their generators
-# and rake tasks are available in development mode:
-# group :development, :test do
-#   gem 'webrat'
-# end
+group :console do
+  gem 'wirble'
+  gem 'hirb'
+  gem 'looksee'
+  gem 'awesome_print'
+end

@@ -1,0 +1,35 @@
+- title "Restaurants"
+
+%table
+  %tr
+    %th Name
+    %th Phone
+    %th Url
+    %th Menu url
+    %th Address
+    %th Note
+    %th Delivers
+    %th Delivery fee
+    %th Tip percent
+    %th Discount percent
+    %th Inspection url
+    %th Review url
+  - for restaurant in @restaurants
+    %tr
+      %td= restaurant.name
+      %td= restaurant.phone
+      %td= restaurant.url
+      %td= restaurant.menu_url
+      %td= restaurant.address
+      %td= restaurant.note
+      %td= restaurant.delivers
+      %td= restaurant.delivery_fee
+      %td= restaurant.tip_percent
+      %td= restaurant.discount_percent
+      %td= restaurant.inspection_url
+      %td= restaurant.review_url
+      %td= link_to 'Show', restaurant
+      %td= link_to 'Edit', edit_restaurant_path(restaurant)
+      %td= link_to 'Destroy', restaurant, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Restaurant", new_restaurant_path(restaurant)

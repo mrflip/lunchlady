@@ -1,0 +1,45 @@
+- title "Restaurant"
+
+%p
+  %strong Name:
+  = @restaurant.name
+%p
+  %strong Phone:
+  = @restaurant.phone
+%p
+  %strong Url:
+  = @restaurant.url
+%p
+  %strong Menu Url:
+  = @restaurant.menu_url
+%p
+  %strong Address:
+  = @restaurant.address
+%p
+  %strong Note:
+  = @restaurant.note
+%p
+  %strong Delivers:
+  = @restaurant.delivers
+%p
+  %strong Delivery Fee:
+  = @restaurant.delivery_fee
+%p
+  %strong Tip Percent:
+  = @restaurant.tip_percent
+%p
+  %strong Discount Percent:
+  = @restaurant.discount_percent
+%p
+  %strong Inspection Url:
+  = @restaurant.inspection_url
+%p
+  %strong Review Url:
+  = @restaurant.review_url
+
+%p
+  = link_to "Edit", edit_restaurant_path(@restaurant)
+  |
+  = link_to "Destroy", @restaurant, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", restaurants_path

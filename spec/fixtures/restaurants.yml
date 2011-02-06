@@ -1,0 +1,27 @@
+one:
+  name: MyString
+  phone: MyString
+  url: MyString
+  menu_url: MyString
+  address: MyText
+  note: MyText
+  delivers: false
+  delivery_fee: 1.5
+  tip_percent: 1
+  discount_percent: 1
+  inspection_url: MyString
+  review_url: MyString
+
+two:
+  name: MyString
+  phone: MyString
+  url: MyString
+  menu_url: MyString
+  address: MyText
+  note: MyText
+  delivers: false
+  delivery_fee: 1.5
+  tip_percent: 1
+  discount_percent: 1
+  inspection_url: MyString
+  review_url: MyString

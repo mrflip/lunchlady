@@ -1,0 +1,52 @@
+= form_for restaurant do |f|
+  = f.error_messages
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  %p
+    = f.label :phone
+    %br
+    = f.text_field :phone
+  %p
+    = f.label :url
+    %br
+    = f.text_field :url
+  %p
+    = f.label :menu_url
+    %br
+    = f.text_field :menu_url
+  %p
+    = f.label :address
+    %br
+    = f.text_area :address
+  %p
+    = f.label :note
+    %br
+    = f.text_area :note
+  %p
+    = f.label :delivers
+    %br
+    = f.check_box :delivers
+  %p
+    = f.label :delivery_fee
+    %br
+    = f.text_field :delivery_fee
+  %p
+    = f.label :tip_percent
+    %br
+    = f.text_field :tip_percent
+  %p
+    = f.label :discount_percent
+    %br
+    = f.text_field :discount_percent
+  %p
+    = f.label :inspection_url
+    %br
+    = f.text_field :inspection_url
+  %p
+    = f.label :review_url
+    %br
+    = f.text_field :review_url
+  %p
+    = f.submit

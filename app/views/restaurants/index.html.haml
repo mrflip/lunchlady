@@ -1,35 +1,20 @@
 - title "Restaurants"
 
-%table
+%table.horizontal
   %tr
-    %th Name
-    %th Phone
-    %th Url
-    %th Menu url
-    %th Address
-    %th Note
-    %th Delivers
-    %th Delivery fee
-    %th Tip percent
-    %th Discount percent
-    %th Inspection url
-    %th Review url
+    %th.td_7    Name
+    %th         Phone
+    %th         Delivers?
+    %th         &nbsp;
+    %th         &nbsp;
+    %th         &nbsp;
   - for restaurant in @restaurants
     %tr
-      %td= restaurant.name
+      %td= link_to_rsrc restaurant
       %td= restaurant.phone
-      %td= restaurant.url
-      %td= restaurant.menu_url
-      %td= restaurant.address
-      %td= restaurant.note
-      %td= restaurant.delivers
-      %td= restaurant.delivery_fee
-      %td= restaurant.tip_percent
-      %td= restaurant.discount_percent
-      %td= restaurant.inspection_url
-      %td= restaurant.review_url
-      %td= link_to 'Show', restaurant
-      %td= link_to 'Edit', edit_restaurant_path(restaurant)
-      %td= link_to 'Destroy', restaurant, :confirm => 'Are you sure?', :method => :delete
+      %td= restaurant.delivers ? 'Y' : ''
+      %td= link_to 'website', restaurant.url
+      %td= link_to 'menu',    restaurant.menu_url
+      %td= link_to 'review',  restaurant.review_url
 
-%p= link_to "New Restaurant", new_restaurant_path(restaurant)
+.buttons= link_to "New Restaurant", new_restaurant_path(restaurant), :class => 'button'

@@ -1,0 +1,44 @@
+- title "Your user info"
+
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+  %fieldset
+    = devise_error_messages!
+    %legend= @title
+    .form_input
+      = f.label          :name
+      = f.text_field     :name
+    .form_input
+      = f.label          :email
+      = f.text_field     :email
+    .checkbox_group
+      = f.check_box      :is_local
+      = f.label          :is_local, "I work in the office, so assume I want to order every day"
+
+    %hr.spacer/
+    .form_input
+      = f.label          :password
+      = f.password_field :password
+      %span.description (leave blank if you don't want to change it)
+    .form_input
+      = f.label          :password_confirmation
+      = f.password_field :password_confirmation
+    %hr/
+    .form_input
+      = f.label          :current_password
+      = f.password_field :current_password
+      %span.description (we need your current password to confirm your changes)
+    .buttons= f.submit "Update"
+
+
+%hr.spacer/
+
+%form  
+  %fieldset
+    = devise_error_messages!
+    %legend= "Remove account"
+    %p
+      This is permanent:
+      .buttons
+        =link_to "Remove my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete, :class => 'button white'
+      
+= link_to "Back", :back

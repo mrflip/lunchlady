@@ -1,0 +1,11 @@
+- title "Resend confirmation instructions"
+= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
+  %fieldset
+    = devise_error_messages!
+    %legend= @title
+    .form_input
+      = f.label 	:email
+      = f.text_field    :email
+    .buttons= f.submit "Resend confirmation instructions"
+
+= render :partial => "devise/shared/links"

@@ -1,0 +1,12 @@
+- title "Forgot your password?"
+
+= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+  %fieldset
+    = devise_error_messages!
+    %legend= @title
+    .form_input
+      = f.label 	:email
+      = f.text_field    :email
+    .buttons= f.submit "Send me reset password instructions", :class => "grid_7"
+
+= render :partial => "devise/shared/links"

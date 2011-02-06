@@ -1,0 +1,19 @@
+- title "Sign in"
+
+= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  %fieldset
+    = devise_error_messages!
+    %legend= @title
+    .form_input
+      = f.label :email
+      = f.text_field :email
+    .form_input
+      = f.label :password
+      = f.password_field :password
+    - if devise_mapping.rememberable?
+      .checkbox_group
+        = f.check_box :remember_me
+        = f.label :remember_me
+    .buttons= f.submit "Sign in"
+
+= render :partial => "devise/shared/links"

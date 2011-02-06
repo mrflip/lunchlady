@@ -1,0 +1,25 @@
+- title "Sign up"
+
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+  %fieldset
+    = devise_error_messages!
+    %legend= @title
+    .form_input
+      = f.label          :name
+      = f.text_field     :name
+    .form_input
+      = f.label          :email
+      = f.text_field     :email
+    .checkbox_group
+      = f.check_box      :is_local
+      = f.label          :is_local, "I work in the office, so assume I want to order every day"
+    %hr/
+    .form_input
+      = f.label          :password
+      = f.password_field :password
+    .form_input
+      = f.label          :password_confirmation
+      = f.password_field :password_confirmation
+    .buttons= f.submit "Sign up"
+      
+= render :partial => "devise/shared/links"

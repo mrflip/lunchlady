@@ -1,4 +1,12 @@
 Lunchlady::Application.routes.draw do
+  devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout', :sign_up => 'signup' }
+
+  
+  resources :users, :only => [:index]
+  as :user do
+    get "users/:id" => "devise/registrations#edit", :as => :user
+  end
+
   root :to => "special_pages#homepage"
 
   match 'admin/grid' => 'special_pages#grid'

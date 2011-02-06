@@ -1,0 +1,19 @@
+- multirow
+
+= content_for :stylesheets do
+  <style type='text/css'> div#main p { font-size: 60px; text-align: center; margin: 0 0 20px 0; border: 1px solid black } </style>
+
+.row
+  .non_semantic_12col
+    %p 12
+
+.row
+  .non_semantic_8col
+    %p 8
+    .row
+      .non_semantic_4col
+        %p 4
+      .non_semantic_4col
+        %p 4
+  .non_semantic_4col_tall
+    %p 4

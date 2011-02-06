@@ -1,4 +1,9 @@
 Lunchlady::Application.routes.draw do
+  root :to => "special_pages#homepage"
+
+  match 'admin/grid' => 'special_pages#grid'
+  match 'admin/text' => 'special_pages#text'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

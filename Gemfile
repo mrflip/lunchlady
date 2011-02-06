@@ -23,6 +23,8 @@ gem 'devise', '~> 1.1'            # User management
 gem 'hpricot'                     # For Devise view generation
 gem 'ruby_parser'                 # For Devise view generation
 
+gem 'hassle',  :git => 'git://github.com/koppen/hassle.git'
+
 # Testing
 group :test do
   gem 'rspec'

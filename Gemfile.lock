@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/koppen/hassle.git
+  revision: 97512c65f4c6fa34a4d4e284c416e8e6ebecbd44
+  specs:
+    hassle (0.0.1)
+      haml
+      rack
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -146,6 +154,7 @@ DEPENDENCIES
   friendly_id (~> 3.1)
   haml (~> 3.0)
   haml-rails
+  hassle!
   hirb
   hpricot
   html5-boilerplate

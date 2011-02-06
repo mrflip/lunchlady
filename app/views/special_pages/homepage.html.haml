@@ -1,6 +1,16 @@
-- title 'AppName'
+- title 'Lunchlady: mmmm....'
+- @meal  = Meal.current
 
 .section
+  - if user_signed_in?
+    - @order = @meal.orders.for_user(current_user).first || @meal.orders.build(:user_id => current_user.id)
+    = render :partial => '/orders/form', :locals => { :freeze_user_id => true }
+          
+  - else
+    .buttons= link_to 'Sign in', new_user_session_path, :class => 'button'
+    == or #{link_to 'Sign up', new_user_registration_path} to place an order
+
+  %hr/
 
   %table.meals
     - Meal.upcoming.each do |meal|
@@ -9,6 +19,5 @@
         %td= link_to_rsrc meal
         %td= meal.restaurant_name
 
-  %ul
-    - %w[restaurants users meals meals ].each do |model|
-      %li== <a href="#{model}">#{model}</a>
+
+        

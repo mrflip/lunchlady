@@ -10,11 +10,19 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  #
+  # * If the user_id is given and that order exists, send to edit not new.
+  # * If the current user's order exists, make sure they don't try to double-create one.
+  #
+  #
   def new
-    params[:user_id] ||= current_user.id if current_user
-    if params[:user_id].present? && (@order = Order.for_user(params[:user_id]).for_meal(@meal).first)
+    if params[:user_id].present? && (@order = Order.for_meal_and_user(@meal, params[:user_id]))
       render :action => 'edit'
     else
+      if user_signed_in?
+        @current_user_order = Order.for_meal_and_user(@meal, current_user.id)
+        params[:user_id] ||= current_user.id if @current_user_order.blank?
+      end
       @order = Order.new(params.merge :meal_id => @meal.id)
     end
   end
@@ -48,7 +56,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     flash[:notice] = "Successfully destroyed order."
-    redirect_to orders_url
+    redirect_to @meal
   end
 
 private

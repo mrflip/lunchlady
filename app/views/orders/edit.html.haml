@@ -1,3 +1,3 @@
 - title raw(%Q{Edit order for #{link_to_rsrc(@order.user)} from #{link_to_rsrc(@meal.restaurant)} on #{link_to_rsrc(@meal)}})
 
-= render 'form'
+= render :partial => 'form', :locals => { :freeze_user_id => true }

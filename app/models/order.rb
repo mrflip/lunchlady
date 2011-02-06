@@ -9,4 +9,8 @@ class Order < ActiveRecord::Base
 
   scope :for_user, lambda{|u| where('user_id = ?', (u.respond_to?(:id) ? u.id : u.to_i) ) }
   scope :for_meal, lambda{|m| where('meal_id = ?', m.id) }
+
+  def self.for_meal_and_user meal, user
+    for_user(user).for_meal(meal).first
+  end
 end

@@ -37,6 +37,12 @@ module Lunchlady
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [:password, :password_confirmation]
+
+    # Turn off timestamped migrations
+    config.active_record.timestamped_migrations = false
+
+    # Rotate log files (50 files max at 1MB each)
+    config.logger = Logger.new(config.paths.log.first, 50, 1048576)
   end
 end

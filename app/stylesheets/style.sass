@@ -23,6 +23,12 @@
 // want more control over which mixins to use
 //@import "partials/example";
 
+// Import the custom grid layout
+$ninesixty-columns:      24
+$ninesixty-gutter-width: 10px
+@import 960/grid
+@import partials/grid960
+
 // Finally, put your own styles in these partials
 // and add more as needed (i.e. forms, tables, nav)
 @import partials/fonts
@@ -30,3 +36,7 @@
 
 // Media should come last
 @import partials/media
+@import partials/buttons
+@import partials/flashes
+@import partials/forms
+@import partials/tables

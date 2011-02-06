@@ -1,0 +1,35 @@
+//
+// Fancy boxes for Rails flash messages
+//
+
+!flash_notice_color  = #bde5f8
+!flash_alert_color   = #ffbaba
+!flash_success_color = #baffba
+
+#flash
+
+  .notice, .alert, .success
+    +grid(22)
+    +grid-buffer(1)
+    border:             1px solid
+    margin-bottom:      6px
+    padding:            12px $ninesixty-gutter-width / 2
+    +border-radius(2px)
+
+  .notice
+    color: $flash_notice_color - #888
+    border-color: $flash_notice_color - #333
+    background-color: $flash_notice_color
+    +linear-gradient(color-stops($flash_notice_color + #111, $flash_notice_color - #111))
+
+  .alert
+    color: $flash_alert_color - #888
+    border-color: $flash_alert_color - #333
+    background-color: $flash_alert_color
+    +linear-gradient(color-stops($flash_alert_color + #111, $flash_alert_color - #111))
+
+  .success
+    color: $flash_success_color - #888
+    border-color: $flash_success_color - #333
+    background-color: $flash_success_color
+    +linear-gradient(color-stops($flash_success_color + #111, $flash_success_color - #111))

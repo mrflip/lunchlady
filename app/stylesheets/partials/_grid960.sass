@@ -1,0 +1,31 @@
+=grid-buffer($n, $cols: $ninesixty-columns)
+  margin-left: ($ninesixty-grid-width / $cols * $n)
+=has-children
+  +alpha
+  +omega
+=grid-tds($cols: $ninesixty-columns, $gutter-width: $ninesixty-gutter-width)
+  @for $n from 1 through $cols
+    .td_#{$n}
+      :width= ($n * $ninesixty-grid-width / $cols) - $ninesixty-gutter-width
+
+
+
+/* hashgrid.js template
+#grid
+  width: $ninesixty-grid-width
+  position: absolute
+  top: 0
+  left: 50%
+  margin-left: -480px
+  div.vert
+    +grid-width(1)
+    border:             solid darkturquoise
+    border-width:       0 1px
+    margin:
+      left:             $ninesixty-gutter-width / 2 - 1
+      right:            $ninesixty-gutter-width / 2 - 1
+  div.horiz
+    height:             15px
+    border-bottom:      1px dotted #aaa
+    margin:             0
+    padding:            0

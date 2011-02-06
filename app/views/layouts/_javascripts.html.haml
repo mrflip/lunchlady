@@ -20,7 +20,7 @@
     
 -#  Append your own using content_for :javascripts
 = yield :javascripts
-
+= javascript_include_tag 'hashgrid'
 -# asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet
 -# Looks for google_account_id first in ENV['GOOGLE_ACCOUNT_ID'] then in config/google.yml
 - if !google_account_id.blank?

@@ -1,0 +1,15 @@
+- title "Meals"
+
+%table
+  %tr
+    %th Ordered on
+    %th Restaurant
+  - for meal in @meals
+    %tr
+      %td= meal.ordered_on
+      %td= meal.restaurant_id
+      %td= link_to 'Show', meal
+      %td= link_to 'Edit', edit_meal_path(meal)
+      %td= link_to 'Destroy', meal, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Meal", new_meal_path(meal)

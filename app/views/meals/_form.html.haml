@@ -1,0 +1,12 @@
+= form_for meal do |f|
+  = f.error_messages
+  %p
+    = f.label :ordered_on
+    %br
+    = f.date_select :ordered_on
+  %p
+    = f.label :restaurant_id
+    %br
+    = f.text_field :restaurant_id
+  %p
+    = f.submit

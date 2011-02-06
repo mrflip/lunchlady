@@ -8,6 +8,11 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Lunchlady
   class Application < Rails::Application
+    config.generators do |g|
+      g.test_framework   :rspec, :fixture => true, :views => false
+      g.integration_tool :rspec, :fixture => true, :views => true
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

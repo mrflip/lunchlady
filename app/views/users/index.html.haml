@@ -1,11 +1,22 @@
 - title "Users"
 
-%table
+%table.users.horizontal
   %tr
     %th Name
+    %th Email
     %th Is local
   - for user in @users
-    %tr
-      %td= link_to_rsrc user
-      %td= user.is_local
+    %tr.hcard
+      %td.fn=           link_to_rsrc user
+      %td.email=        user.email
+      %td.local=        user.is_local
+
+.buttons
+  - if user_signed_in?
+    %p
+      To create a new user,
+      = link_to "sign out", destroy_user_session_path
+      and then go through the signup process
+  - else
+    = link_to "New user", new_user_registration_path, :class => :button
 

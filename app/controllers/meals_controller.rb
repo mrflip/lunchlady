@@ -2,7 +2,7 @@ class MealsController < ApplicationController
   before_filter :find_from_params, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @meals = Meal.all
+    @meals = Meal.by_recency
   end
 
   def show

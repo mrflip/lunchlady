@@ -3,6 +3,8 @@ class Meal < ActiveRecord::Base
   belongs_to      :restaurant
   has_many        :orders
 
+  scope :by_recency, order('ordered_on DESC')
+
   def self.for_date date_str
     date  = Chronic.parse(date_str).to_date
     order = find_or_create_by_ordered_on(date)
@@ -18,7 +20,7 @@ class Meal < ActiveRecord::Base
 
   #
   def titleize
-    "Meal for #{ordered_on.to_s(:verbose)}"
+    ordered_on.to_s(:verbose)
   end
 
   def restaurant_name

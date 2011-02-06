@@ -1,8 +1,8 @@
 Lunchlady::Application.routes.draw do
 
-  resources :orders
-
-  resources :meals
+  resources :meals do
+    resources :orders
+  end
 
   resources :restaurants
 

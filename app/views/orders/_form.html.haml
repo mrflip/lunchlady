@@ -1,32 +1,15 @@
-= form_for order do |f|
-  = f.error_messages
-  %p
-    = f.label :user_id
-    %br
-    = f.text_field :user_id
-  %p
-    = f.label :order_id
-    %br
-    = f.text_field :order_id
-  %p
-    = f.label :description
-    %br
-    = f.text_area :description
-  %p
-    = f.label :price
-    %br
-    = f.text_field :price
-  %p
-    = f.label :copay
-    %br
-    = f.text_field :copay
-  %p
-    = f.label :guest_of
-    %br
-    = f.text_field :guest_of
-  %p
-    = f.label :created_by
-    %br
-    = f.text_field :created_by
-  %p
-    = f.submit
+= form_for [@meal, @order] do |f|
+  %fieldset.order
+    = f.error_messages
+    %legend= @title
+    .form_input
+      = f.label      :user_id
+      = f.select("user_id", User.alphabetically.map{|u| [ u.name, u.id ] })
+    .form_input
+      = f.label      :description
+      = f.text_area  :description
+    .form_input
+      = f.label      :price
+      = f.text_field :price
+    .buttons
+      = f.submit

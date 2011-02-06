@@ -1,5 +1,3 @@
-- title "New Order"
+- title raw(%Q{New order from #{link_to_rsrc(@meal.restaurant)} on #{link_to_rsrc(@meal)}})
 
 = render 'form'
-
-%p= link_to "Back to List", orders_path

@@ -1,13 +1,21 @@
 - title "Users"
 
+.right
+  %p.clear
+    To set your user image, visit <a href="http://gravatar.com/">gravatar.com</a>
+
+  %hr/  
+
 %table.users.horizontal
   %tr
+    %th &nbsp;
     %th Name
     %th Email
     %th Is local
   - for user in @users
     %tr.hcard
-      %td.fn=           link_to_rsrc user
+      %td.photo=        image_tag avatar_url(user)
+      %td.fn.n=         link_to_rsrc user
       %td.email=        user.email
       %td.local=        user.is_local
 
@@ -20,3 +28,4 @@
   - else
     = link_to "New user", new_user_registration_path, :class => :button
 
+    

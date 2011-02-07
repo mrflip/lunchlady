@@ -1,0 +1,33 @@
+%table.vertical.restaurant.has_ratings
+  %tr
+    %th         Name
+    %td.td_12=  @restaurant.name
+    %td         Your rating:
+    %td.td_3.ratings= ratings_for @restaurant, :show_user_rating => true
+  %tr
+    %th         Phone
+    %td=        @restaurant.phone
+    %td         Overall rating:
+    %td.td_3.ratings= ratings_for @restaurant, :static
+  %tr
+    %th         Links
+    %td
+      =         restaurant_links(@restaurant)
+      =         delivery_status(@restaurant)
+    %td         Last ordered:
+    %td=        last_ordered_ago(@restaurant)
+  %tr
+    %th         Address
+    %td=        @restaurant.address
+    %td{ :colspan => 2}
+      =        @restaurant.note
+  %tr
+    - if @restaurant.discount_percent.to_i > 0
+      %th       Discount Percent
+      %td=      @restaurant.discount_percent
+    - if @restaurant.tip_percent.to_i > 0
+      %td
+        tip
+        =      @restaurant.tip_percent
+    - else
+      %td &nbsp;

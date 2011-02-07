@@ -1,46 +1,10 @@
 - title "Restaurant"
 
-%table.vertical.restaurant.has_ratings
-  %tr
-    %th         Name
-    %td.td_12=  @restaurant.name
-    %td         Your rating:
-    %td.td_3.ratings= ratings_for @restaurant, :show_user_rating => true
-  %tr
-    %th         Phone
-    %td=        @restaurant.phone
-    %td         Overall rating:
-    %td.td_3.ratings= ratings_for @restaurant, :static
-  %tr
-    %th=        link_to "Homepage", @restaurant.url
-    %td=        link_to @restaurant.url, @restaurant.url
-  %tr
-    %th=        link_to "Menu", @restaurant.menu_url
-    %td=        link_to @restaurant.menu_url, @restaurant.menu_url
-  %tr
-    %th=        link_to "Review", @restaurant.review_url
-    %td=        link_to @restaurant.review_url, @restaurant.review_url
-  %tr
-    %th         Address
-    %td=        @restaurant.address
-  %tr
-    %th         Delivers
-    %td=        @restaurant.delivers
-  - if @restaurant.delivery_fee.to_f > 0
-    %tr
-      %th       Delivery Fee
-      %td=      @restaurant.delivery_fee
-  - if @restaurant.tip_percent.to_i > 0
-    %tr
-      %th       Tip Percent
-      %td=      @restaurant.tip_percent
-  - if @restaurant.discount_percent.to_i > 0
-    %tr
-      %th       Discount Percent
-      %td=      @restaurant.discount_percent
-  %tr
-    %th         Notes
-    %td=        @restaurant.note
+= render 'restaurant'
 
 .buttons
   = link_to "Edit Restaurant Info", edit_restaurant_path(@restaurant), :class => :button
+
+%hr/
+
+=render '/meals/meals', :meals => (@meals = @restaurant.meals.by_recency)

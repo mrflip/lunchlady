@@ -3,6 +3,7 @@
     %th Meal
     %th Restaurant
     %th Overall Rating
+    %th Last Order
     %th Order Count
     %th 
   - for meal in @meals
@@ -11,9 +12,13 @@
       - if meal.restaurant
         %td= link_to_rsrc meal.restaurant 
         %td.td_3.ratings= ratings_for meal.restaurant, :static, :size => 'medium'
+        %td
+          = last_ordered_ago(meal.restaurant)
       - else
         %td.ghost &mdash;
         %td       &nbsp;
+        %td       &nbsp;
+        
       %td
         = link_to 'View orders', meal
         == (#{meal.orders.count})

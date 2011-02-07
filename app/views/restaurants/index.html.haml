@@ -11,19 +11,17 @@
     %th.td_7    Name
     %th.td_3         Phone
     %th.td_1         Delivers?
-    %th.td_2         &nbsp;
-    %th.td_2         &nbsp;
-    %th.td_2         &nbsp;
+    %th.td_4         Links
+    %th.td_3         Last Order
     %th.td_3         Your Rating
     %th.td_3         Overall Rating
   - for restaurant in @restaurants
     %tr
       %td= link_to_rsrc restaurant
       %td= restaurant.phone
-      %td= restaurant.delivers ? 'Y' : ''
-      %td= link_to 'website', restaurant.url,        :target => 'lunchlady_popup'
-      %td= link_to 'menu',    restaurant.menu_url,   :target => 'lunchlady_popup'
-      %td= link_to 'review',  restaurant.review_url, :target => 'lunchlady_popup'
+      %td= delivery_status(restaurant, 'Y')
+      %td= restaurant_links(restaurant)
+      %td= restaurant.days_since_last_ordered
       %td.ratings= ratings_for restaurant, :show_user_rating => true
       %td.ratings= ratings_for restaurant, :static
 

@@ -4,6 +4,8 @@ class Restaurant < ActiveRecord::Base
     :delivers, :delivery_fee, :tip_percent, :discount_percent,
     :note)
   scope :alphabetically, order("restaurants.name ASC")
+  has_many :meals
+  has_many :orders, :through => :meals
 
   #
   # Plugins
@@ -20,6 +22,15 @@ class Restaurant < ActiveRecord::Base
 
   def delivers?
     delivers.present?
+  end
+
+  def last_ordered_on
+    meal = meals.recent_before_today.first or return
+    meal.ordered_on
+  end
+
+  def days_since_last_ordered
+    last_ordered_on && (Date.today - last_ordered_on).to_i
   end
 end
 

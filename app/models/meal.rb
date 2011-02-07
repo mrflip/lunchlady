@@ -4,6 +4,7 @@ class Meal < ActiveRecord::Base
   has_many        :orders, :dependent => :destroy
 
   scope :by_recency, order('ordered_on DESC')
+  scope :recent_before_today, lambda{ order('ordered_on DESC').where(['ordered_on < ?', Date.today]) }
 
   def self.for_date date_str
     date  = Chronic.parse(date_str).to_date

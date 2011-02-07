@@ -10,7 +10,7 @@ Lunchlady will
 
 Have some more Sloppy Joes!
 
-Until I get around to password protecting the app, you can "try it out":http://lunchlady.heroku.com at http://lunchlady.heroku.com thanks Heroku!
+Until I get around to password protecting the app, you can "try it out":http://lunchlady.heroku.com at http://lunchlady.heroku.com thanks Heroku! The app is based on my fork of the "Greendog rails template.":https://github.com/mrflip/greendog-rails-template
 
 <em>(* One of many reasons you should "come work with us":http://infochimps.com/ -- there is such a thing as a free lunch!)</em>
 

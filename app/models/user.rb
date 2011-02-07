@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   #
 
   def self.orderers_for meal
-    [local, all(:joins => :orders, :conditions => ['orders.meal_id = ?', meal.id])].flatten.uniq
+    [local.by_id, all(:joins => :orders, :conditions => ['orders.meal_id = ?', meal.id])].flatten.uniq
   end
 
   def past_orders_for restaurant

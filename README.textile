@@ -18,7 +18,8 @@ Until I get around to password protecting the app, you can "try it out":http://l
 
 h2. TODO
 
-* Remember past orders for restaurant and suggest them to user
+* make it so you have to type a magic word into the signup box to create a new account
+* Remember past orders for restaurant and suggest them to user (rails part works, but need javascript to inject into text field)
 * validations
 * http://infochimps.com/datasets/city-of-austin-restaurant-inspection-scores--2
 * Stats:

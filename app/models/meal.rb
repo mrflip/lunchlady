@@ -1,7 +1,7 @@
 class Meal < ActiveRecord::Base
   attr_accessible :restaurant_id, :ordered_on
   belongs_to      :restaurant
-  has_many        :orders
+  has_many        :orders, :dependent => :destroy
 
   scope :by_recency, order('ordered_on DESC')
 

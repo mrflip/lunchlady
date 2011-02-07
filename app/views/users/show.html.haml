@@ -13,13 +13,13 @@
 
 %table.horizontal.orders
   %tr
-    %th.td_3    Date
+    %th.td_4    Meal
     %th.td_4    Restaurant
     %th.td_17   Order
   - @user.orders.each do |order|
     %tr
-      %td= order.meal.ordered_on_str
-      %td= order.meal.restaurant.titleize if order.meal.restaurant
-      %td= order.description
+      %td= link_to_rsrc order.meal
+      %td= order.meal.restaurant_name if order.meal
+      %td= link_to order.description, [order.meal, order]
       
       

@@ -1,1 +1,1 @@
-Date::DATE_FORMATS[:verbose] = lambda{|time| time.strftime("%A, %B #{time.day.ordinalize}") }
+Date::DATE_FORMATS[:verbose] = lambda{|time| time.strftime("%A, %b #{time.day.ordinalize}") }

@@ -13,4 +13,8 @@ class Order < ActiveRecord::Base
   def self.for_meal_and_user meal, user
     for_user(user).for_meal(meal).first
   end
+
+  def titleize
+    "#{user && user.titleize} on #{meal && meal.titleize}"
+  end
 end

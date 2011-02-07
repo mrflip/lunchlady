@@ -27,6 +27,7 @@
      when ActiveRecord::Base then dest = rsrc                        ; text = rsrc.titleize
      when Class              then dest = url_for(rsrc.to_s.tableize) ; text = rsrc.to_s.titleize.pluralize
      when Symbol             then dest = rsrc                        ; text = rsrc.to_s.titleize.pluralize
+     when Array              then dest = rsrc                        ; text = rsrc.last.titleize
      else                         dest = rsrc
      end
      link_to(text, dest, options)

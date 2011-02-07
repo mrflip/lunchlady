@@ -32,4 +32,14 @@
      end
      link_to(text, dest, options)
    end
+
+   def avatar_url(user)
+     size          = 36
+     default_img   = "#{root_url}images/avatar-32.png"
+     gravatar_id = Digest::MD5::hexdigest(user.email).downcase
+     query_params = []
+     query_params << "s=#{size}"
+     query_params << "d=#{CGI.escape(default_img)}"
+     "http://www.gravatar.com/avatar/#{gravatar_id}?#{query_params.join('&')}"
+   end
  end

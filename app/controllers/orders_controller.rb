@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
     @order.created_by = current_user.id if current_user
     if @order.save
       flash[:notice] = "Successfully updated order."
-      redirect_to order_url
+      redirect_to @meal
     else
       render :action => 'edit'
     end

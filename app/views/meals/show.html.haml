@@ -4,12 +4,8 @@
   = @meal.titleize
   from 
   = link_to_rsrc @meal.restaurant
-  == ~~ 
-  %span= link_to 'website', @meal.restaurant.url
-  &middot;
-  %span= link_to 'menu',    @meal.restaurant.menu_url
-  &middot;
-  %span= link_to 'review',  @meal.restaurant.review_url
+  == ~~
+  = restaurant_links(@meal.restaurant)
 
 = render '/restaurants/restaurant', :restaurant => (@restaurant = @meal.restaurant)
   

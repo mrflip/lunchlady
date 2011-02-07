@@ -1,5 +1,6 @@
 - freeze_user_id    ||= false
 - hide_link_to_meal ||= false
+- expanded          ||= false
 - orderer_str = case when freeze_user_id && user_signed_in? && (@order.user_id == current_user.id) then " for you" when freeze_user_id && @order.user then " for " + @order.user.name else "" end
 
 = form_for [@meal, @order] do |f|
@@ -18,6 +19,14 @@
     .form_input
       = f.label      :price
       = f.text_field :price
+    - if expanded
+      .form_input
+        = f.label      :copay
+        = f.text_field :copay
+      .form_input
+        - @order.guest_of ||= current_user 
+        = f.label      :guest_of
+        = f.select(:guest_of, User.alphabetically.map{|u| [ u.name, u.id ] })
     .buttons
       = f.submit
       .right

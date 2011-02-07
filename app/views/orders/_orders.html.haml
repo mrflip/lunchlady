@@ -1,17 +1,22 @@
 %table.orders.horizontal
   %tr
+    %th.td_1  &nbsp;
     %th.td_4  Name
     %th.td_2  Price
     %th.td_3  &nbsp;
-    %th.td_15 Description      
+    %th.td_12 Description      
+    %th       &nbsp;
   - @orders.each do |order|
     %tr
+      %td.photo=         image_tag avatar_url(order.user)
       %td.user=          link_to_rsrc order.user
       - if order && !order.new_record?
         %td.price=       number_to_currency(order.price)
         %td=             link_to 'edit order', edit_meal_order_path(@meal, order)
         %td.description= order.description
+        %td.copay=       number_to_currency(order.copay) unless order.copay.to_f == 0
       - else
         %td.price        &nbsp;
         %td=             link_to 'place order', new_meal_order_path(@meal, order, :user_id => order.user_id)
+        %td              &nbsp;
         %td              &nbsp;

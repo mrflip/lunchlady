@@ -8,7 +8,8 @@ Lunchlady will
 * Help you know which restaurants are the most costly
 * Remember everyone's past orders, 
 
-(*) One of many reasons you should "come work with us":http://infochimps.com/ -- there is such a thing as a free lunch!
+
+<em>(* One of many reasons you should "come work with us":http://infochimps.com/ -- there is such a thing as a free lunch!)</em>
 
 ---------------------------------------------------------------------------
 

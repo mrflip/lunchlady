@@ -33,6 +33,57 @@ h2. TODO
   
 ---------------------------------------------------------------------------
 
+h2. Behavior
+
+h4. As a visitor to the homepage
+
+* I should be invited to sign in or sign up if I'm not logged in.
+* If I am logged in, I should be able to quickly place my order and know that it was received.
+
+h4. As a Lunchmeister organizing a meal
+
+* I can create a new meal efficiently
+* I get a few good suggestions for the restaurant, 
+* I can change the restaurant for a meal
+  - It should be possible (but difficult) to do this once any orders have been set.
+  - changing the restaurant should delete all current orders
+
+h4. As a person placing an order
+
+* It's easy to find the restaurant's menu
+* It's straightforward to type in a new order and its price
+* I can call up an old order if I always get the same thing
+
+h4. As a Lunchmeister finalizing a meal
+
+* I can see
+  - the phone number and other details of the restaurant
+  - all the orders that have been placed
+  - the total expected cost and the suggested tip
+  - whether orders from people who typically order lunch are missing
+* I can  enter a "best-guess" order for somebody who hasn't ordered
+
+h4. As a team optimizing for overall joy
+
+* We can see 
+  - actual overall price per person for each restaurant
+  - how long it's been since we ordered from the restaurant
+  - how much people love the restaurant
+
+* We can make sure everyone's favorite restaurant is cycled through, even if it's not the team consensus
+
+* I can invite a guest to the office and pay out-of-pocket for their meal
+* We can have visitors over who will pay for their own meal.
+
+h4. Questions
+
+How to vote?
+* Star ratings on restaurants
+* Place a token to lobby for a restaurant to be chosen
+
+---------------------------------------------------------------------------
+
+
 h2. Object Models
 
 User

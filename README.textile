@@ -54,6 +54,9 @@ h4. As a person placing an order
 * It's straightforward to type in a new order and its price
 * I can call up an old order if I always get the same thing
 
+* I can enter an order for another person
+* I'm prevented from creating two orders for the same person and meal
+
 h4. As a Lunchmeister finalizing a meal
 
 * I can see
@@ -61,7 +64,8 @@ h4. As a Lunchmeister finalizing a meal
   - all the orders that have been placed
   - the total expected cost and the suggested tip
   - whether orders from people who typically order lunch are missing
-* I can  enter a "best-guess" order for somebody who hasn't ordered
+* I can enter a "best-guess" order for somebody who hasn't ordered
+* I can see metrics on each restaurant to ask for a discount, and to make sure any minimum monthly order target is hit.
 
 h4. As a team optimizing for overall joy
 
@@ -69,11 +73,21 @@ h4. As a team optimizing for overall joy
   - actual overall price per person for each restaurant
   - how long it's been since we ordered from the restaurant
   - how much people love the restaurant
-
 * We can make sure everyone's favorite restaurant is cycled through, even if it's not the team consensus
+* So that metrics are accurate, I should not be able to edit a past meal or order, and should not be able to create ones in the unrealistic future
+
+h4. So that we can have visitors over
 
 * I can invite a guest to the office and pay out-of-pocket for their meal
 * We can have visitors over who will pay for their own meal.
+* Correct accounting for team, company guests and co-paid guests
+
+h4. As a team that is efficient and open, but not too open
+
+* I should be able to place an order for another person
+* If I'm logged in I can do anything, but am discouraged from doing stupid things
+* It's easy for a guest to sign up given a minimal token
+* It's difficult for a griefer to get an account
 
 h4. Questions
 

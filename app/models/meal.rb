@@ -38,3 +38,15 @@ class Meal < ActiveRecord::Base
     ordered_on.to_s
   end
 end
+
+# == Schema Information
+#
+# Table name: meals
+#
+#  id            :integer         not null, primary key
+#  ordered_on    :date
+#  restaurant_id :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+

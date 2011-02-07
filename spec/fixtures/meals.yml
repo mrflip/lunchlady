@@ -5,3 +5,15 @@ one:
 two:
   ordered_on: 2011-02-06
   restaurant_id: 1
+
+# == Schema Information
+#
+# Table name: meals
+#
+#  id            :integer         not null, primary key
+#  ordered_on    :date
+#  restaurant_id :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+

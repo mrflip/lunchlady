@@ -13,6 +13,12 @@
     .checkbox_group
       = f.check_box      :is_local
       = f.label          :is_local, "I work in the office, so assume I want to order every day"
+    %br/
+    .photo
+      = image_tag avatar_url(@user, :s => 48)
+      %br/
+      %span.quiet
+        Set your image at <a href="http://gravatar.com/">gravatar.com</a>
 
     %hr.spacer/
     .form_input

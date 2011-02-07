@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
       render :action => 'edit'
     else
       params[:user_id] ||= current_user.id if user_signed_in?
-      @order = Order.new(params.merge :meal_id => @meal.id)
+      @order    = Order.new(params.merge :meal_id => @meal.id)
     end
   end
 

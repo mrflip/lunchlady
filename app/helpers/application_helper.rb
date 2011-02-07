@@ -33,8 +33,8 @@
      link_to(text, dest, options)
    end
 
-   def avatar_url(user)
-     size          = 36
+   def avatar_url(user, options={})
+     size          = options[:s] || 36
      default_img   = "#{root_url}images/avatar-32.png"
      gravatar_id = Digest::MD5::hexdigest(user.email).downcase
      query_params = []

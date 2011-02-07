@@ -20,8 +20,12 @@
 
 = render '/orders/orders'
 
+.buttons
+  = link_to "Order for Someone Else", new_meal_order_path(@meal), :class => 'button medium grid_5 clear'
+%br.clear/
+
 %hr.spacer/
 
 .buttons
-  = link_to "Change restaurant", edit_meal_path(@meal), :class => 'button small white grid_4'
-  %span  (will remove all orders)
+  = link_to "Change restaurant",      edit_meal_path(@meal),      :class => 'button medium white grid_5'
+  %div{ :style => 'padding-top: 7px' }  (will remove all orders)

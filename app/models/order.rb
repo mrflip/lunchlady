@@ -6,6 +6,7 @@ class Order < ActiveRecord::Base
   validates :user_id,  :presence => true
   validates :meal_id,  :presence => true
   validates :price,    :presence => true, :numericality => true
+  validates :user_id,  :uniqueness => {:scope => :meal_id, :message => "already has an order. Go back to the meal and hit 'edit order'" }
 
   scope :for_user, lambda{|u| where('user_id = ?', (u.respond_to?(:id) ? u.id : u.to_i) ) }
   scope :for_meal, lambda{|m| where('meal_id = ?', m.id) }

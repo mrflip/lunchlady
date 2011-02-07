@@ -16,6 +16,8 @@
     .form_input
       = f.label      :description
       = f.text_area  :description
+    .form_input{ :style => 'display:none' }
+      = select_tag(:previous_orders, options_for_select(@meal.restaurant.previous_order_descriptions(current_user).map{|o| [o.description, "%.2f"%o.price].to_json }.uniq))
     .form_input
       = f.label      :price
       = f.text_field :price

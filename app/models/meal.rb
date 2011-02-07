@@ -5,6 +5,7 @@ class Meal < ActiveRecord::Base
 
   scope :by_recency, order('ordered_on DESC')
   scope :recent_before_today, lambda{ order('ordered_on DESC').where(['ordered_on < ?', Date.today]) }
+  scope :for_restaurant, lambda{|r| where('restaurant_id = ?', (r.respond_to?(:id) ? r.id : r.to_i) ) }
 
   def self.for_date date_str
     date  = Chronic.parse(date_str).to_date

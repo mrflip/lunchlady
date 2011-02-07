@@ -32,6 +32,13 @@ class Restaurant < ActiveRecord::Base
   def days_since_last_ordered
     last_ordered_on && (Date.today - last_ordered_on).to_i
   end
+
+  # Find previous orders from this restaurant;
+  # * given user's orders first, most recent first;
+  # * then other users' orders, most recent first
+  def previous_order_descriptions user
+    orders.order("(orders.user_id = #{user.id}) DESC, orders.created_at DESC")
+  end
 end
 
 # == Schema Information

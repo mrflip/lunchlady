@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   #
   has_many :orders
   has_many :meals,      :through => :orders
-  has_many :restaurants, :through => :orders
+
   #
   scope :local,          lambda{ where('(users.is_local IS NOT NULL)') }
   scope :alphabetically, order("users.name ASC")
@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
 
   def self.orderers_for meal
     [local, all(:joins => :orders, :conditions => ['orders.meal_id = ?', meal.id])].flatten.uniq
+  end
+
+  def past_orders_for restaurant
+    orders
   end
 
   def titleize

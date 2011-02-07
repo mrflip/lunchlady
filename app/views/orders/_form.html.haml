@@ -5,7 +5,7 @@
 = form_for [@meal, @order] do |f|
   %fieldset.order
     = f.error_messages
-    %legend== Order#{orderer_str} from #{@meal.restaurant.titleize} on #{link_to_rsrc @meal}
+    %legend== Order#{orderer_str} from #{@meal.restaurant_name} on #{link_to_rsrc @meal}
     - if freeze_user_id
       = f.hidden_field   :user_id
     - else

@@ -20,7 +20,12 @@
 
 %hr/
 
-%table.orders
+%table.orders.horizontal
+  %tr
+    %th.td_3  Name
+    %th.td_2  Price
+    %th.td_3  &nbsp;
+    %th.td_16 Description      
   - User.orderers_for(@meal).each do |user|
     - order = @meal.orders.for_user(user).first 
     %tr

@@ -18,6 +18,10 @@ h2. TODO
 * validations
 * Vote for a restaurant
 * http://infochimps.com/datasets/city-of-austin-restaurant-inspection-scores--2
+* Stats:
+  - How long since we last ordered from a restaurant
+  - Average per-head order price
+  - consensus rating.
 
 ---------------------------------------------------------------------------
 

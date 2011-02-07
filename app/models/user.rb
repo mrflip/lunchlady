@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :restaurants, :through => :orders
   scope :local,          lambda{ where('(users.is_local IS NOT NULL)') }
   scope :alphabetically, order("users.name ASC")
+  scope :by_id,          order("users.id ASC")
 
   validates :name,  :presence => true, :length => {:minimum => 1, :maximum => 100}
 

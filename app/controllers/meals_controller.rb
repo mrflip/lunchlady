@@ -35,7 +35,6 @@ class MealsController < ApplicationController
   end
 
   def destroy
-    @meal = Meal.find(params[:id])
     @meal.destroy
     flash[:notice] = "Successfully destroyed meal."
     redirect_to meals_url

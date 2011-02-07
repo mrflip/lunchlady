@@ -1,6 +1,6 @@
 Lunchlady::Application.routes.draw do
 
-  resources :meals do
+  resources :meals, :only => [:index, :show, :edit, :update, :destroy] do
     resources :orders
   end
 

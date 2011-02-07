@@ -8,7 +8,9 @@ Lunchlady will
 * Remember everyone's past orders, if they don't get one in on time
 * Make your office manager happy, which is the secret to a successful business
 
-Have some more Sloppy Joe's!
+Have some more Sloppy Joes!
+
+Until I get around to password protecting the app, you can "try it out":http://lunchlady.heroku.com at http://lunchlady.heroku.com thanks Heroku!
 
 <em>(* One of many reasons you should "come work with us":http://infochimps.com/ -- there is such a thing as a free lunch!)</em>
 

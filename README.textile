@@ -27,7 +27,7 @@ h2. TODO
 
 ---------------------------------------------------------------------------
 
-!https://github.com/mrflip/lunchlady/tree/master/public/images/lunchlady_doris.png!
+!https://github.com/mrflip/lunchlady/raw/master/public/images/lunchlady_doris.png!
   
 ---------------------------------------------------------------------------
 

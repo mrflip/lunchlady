@@ -40,14 +40,6 @@ h4. As a visitor to the homepage
 * I should be invited to sign in or sign up if I'm not logged in.
 * If I am logged in, I should be able to quickly place my order and know that it was received.
 
-h4. As a Lunchmeister organizing a meal
-
-* I can create a new meal efficiently
-* I get a few good suggestions for the restaurant, 
-* I can change the restaurant for a meal
-  - It should be possible (but difficult) to do this once any orders have been set.
-  - changing the restaurant should delete all current orders
-
 h4. As a person placing an order
 
 * It's easy to find the restaurant's menu
@@ -56,6 +48,14 @@ h4. As a person placing an order
 
 * I can enter an order for another person
 * I'm prevented from creating two orders for the same person and meal
+
+h4. As a Lunchmeister organizing a meal
+
+* I can create a new meal efficiently
+* I get a few good robo-suggestions for the restaurant, but have absolute supreme unquestioned authority to choose any restaurant
+* I can change the restaurant for a meal
+  - It should be possible (but difficult) to do this once any orders have been set.
+  - changing the restaurant should delete all current orders
 
 h4. As a Lunchmeister finalizing a meal
 
@@ -75,6 +75,9 @@ h4. As a team optimizing for overall joy
   - how much people love the restaurant
 * We can make sure everyone's favorite restaurant is cycled through, even if it's not the team consensus
 * So that metrics are accurate, I should not be able to edit a past meal or order, and should not be able to create ones in the unrealistic future
+* restaurant votes are fair:
+  - each user's votes are adjusted to their mean
+  - only include regulars
 
 h4. So that we can have visitors over
 

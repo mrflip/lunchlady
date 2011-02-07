@@ -4,10 +4,11 @@ Hooray weekend app!
 
 Lunchlady will
 
-* Help you know which restaurants are the best-loved
-* Help you know which restaurants are the most costly
-* Remember everyone's past orders, 
+* Help you know which restaurants are the best-loved, or overpriced, or haven't been ordered from in a while
+* Remember everyone's past orders, if they don't get one in on time
+* Make your office manager happy, which is the secret to a successful business
 
+Have some more Sloppy Joe's!
 
 <em>(* One of many reasons you should "come work with us":http://infochimps.com/ -- there is such a thing as a free lunch!)</em>
 
@@ -24,6 +25,10 @@ h2. TODO
   - Average per-head order price
   - consensus rating.
 
+---------------------------------------------------------------------------
+
+!https://github.com/mrflip/lunchlady/tree/master/public/images/lunchlady_doris.png!
+  
 ---------------------------------------------------------------------------
 
 h2. Object Models

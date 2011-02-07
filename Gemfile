@@ -29,9 +29,15 @@ gem 'hassle',  :git => 'git://github.com/koppen/hassle.git'
 group :test do
   gem 'rspec'
   gem 'rspec-rails'
-  # gem "mocha"
   gem 'rcov'
   gem 'forgery'
+  gem 'steak'
+  gem 'machinist'
+  gem 'pickle'
+  gem 'capybara'
+  gem 'delorean'
+  gem 'database_cleaner'
+  gem 'spork'
 end
 
 group :development do

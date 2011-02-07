@@ -1,4 +1,6 @@
 class SpecialPagesController < ApplicationController
+  before_filter :authenticate_user!, :except => [:homepage]
+
   def homepage
   end
 

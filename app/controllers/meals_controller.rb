@@ -1,4 +1,5 @@
 class MealsController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :find_from_params, :only => [:show, :edit, :update, :destroy]
 
   def index

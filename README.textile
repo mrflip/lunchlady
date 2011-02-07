@@ -92,6 +92,27 @@ h4. As a team that is efficient and open, but not too open
 * It's easy for a guest to sign up given a minimal token
 * It's difficult for a griefer to get an account
 
+* If I am not logged in, the only pages I can view are
+  - the homepage, which shows only some stuff
+  - the login, signup, and password recovery pages
+
+h4. Account
+
+* list all users:
+  - all users (with link), email, avatar, number of orders, is_local
+* show any user:
+  - user info, user metrics, past orders
+* log out:
+  - link on top when I'm signed in, not when I'm signed out.
+* log in:
+  - link on top when I'm signed out, not when I'm signed in.               
+* register new account:
+  - link on top when I'm signed out, not when I'm signed in.
+  - prompts for full name, email, is_local, 
+* edit my account:
+  - name, email, is_local
+  - change password
+
 h4. Questions
 
 How to vote?

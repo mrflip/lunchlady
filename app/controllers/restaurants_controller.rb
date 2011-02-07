@@ -1,10 +1,12 @@
 class RestaurantsController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :find_from_params, :only => [:show, :edit, :update, :destroy]
+
   def index
     @restaurants = Restaurant.alphabetically
   end
 
   def show
-    @restaurant = Restaurant.find(params[:id])
   end
 
   def new
@@ -22,11 +24,9 @@ class RestaurantsController < ApplicationController
   end
 
   def edit
-    @restaurant = Restaurant.find(params[:id])
   end
 
   def update
-    @restaurant = Restaurant.find(params[:id])
     if @restaurant.update_attributes(params[:restaurant])
       flash[:notice] = "Successfully updated restaurant."
       redirect_to restaurant_url
@@ -36,9 +36,14 @@ class RestaurantsController < ApplicationController
   end
 
   def destroy
-    @restaurant = Restaurant.find(params[:id])
     @restaurant.destroy
     flash[:notice] = "Successfully destroyed restaurant."
     redirect_to restaurants_url
+  end
+
+private
+
+  def find_from_params
+    @restaurant = Restaurant.find(params[:id])
   end
 end

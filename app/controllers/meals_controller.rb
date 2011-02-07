@@ -8,6 +8,8 @@ class MealsController < ApplicationController
 
   def show
     if @meal.restaurant
+      @users  = User.orderers_for(@meal)
+      @orders = @users.map{|user| @meal.orders.for_user(user).first || @meal.orders.build(:user_id => user.id) }
       render :action => 'show'
     else
       render :action => 'edit'

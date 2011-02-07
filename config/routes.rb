@@ -2,7 +2,7 @@ Lunchlady::Application.routes.draw do
   root :to => "special_pages#homepage"
 
   resources :meals, :only => [:index, :show, :edit, :update, :destroy] do
-    resources :orders
+    resources :orders, :except => [:index]
   end
 
   resources :restaurants do

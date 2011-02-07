@@ -16,7 +16,7 @@
 
   %hr/
 
-  = render :partial => '/meals/meals', :object => Meal.upcoming
+  = render '/meals/meals', :meals => (@meals = Meal.upcoming)
 
 
         

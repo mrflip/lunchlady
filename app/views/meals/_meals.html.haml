@@ -1,19 +1,19 @@
-%table.meals
-  - Meal.upcoming.each do |meal|
-    %tr.meal
-      %td= meal.day_name
-      %td= link_to_rsrc meal
-      %td= meal.restaurant_name
-
-%table.meals.horizontal
+%table.meals.horizontal.has_ratings
   %tr
     %th Meal
     %th Restaurant
+    %th Overall Rating
     %th Order Count
     %th 
   - for meal in @meals
     %tr
       %td= link_to_rsrc meal
-      %td= link_to_rsrc meal.restaurant
-      %td= meal.orders.count
-      %td= link_to 'View meal', meal
+      - if meal.restaurant
+        %td= link_to_rsrc meal.restaurant 
+        %td.td_3.ratings= ratings_for meal.restaurant, :static, :size => 'medium'
+      - else
+        %td.ghost &mdash;
+        %td       &nbsp;
+      %td
+        = link_to 'View orders', meal
+        == (#{meal.orders.count})

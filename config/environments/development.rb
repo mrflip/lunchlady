@@ -19,7 +19,7 @@ Lunchlady::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
 
-  ActiveSupport::Dependencies.explicitly_unloadable_constants = ['AjaxfulRating']
+  # ActiveSupport::Dependencies.explicitly_unloadable_constants = ['AjaxfulRating']
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

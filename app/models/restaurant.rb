@@ -14,9 +14,12 @@ class Restaurant < ActiveRecord::Base
   #
   # Methods
   #
-
   def titleize
     name
+  end
+
+  def delivers?
+    delivers.present?
   end
 end
 

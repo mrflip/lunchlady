@@ -22,11 +22,18 @@ h4
 strong, th
   font-weight:            	bold
 
-small
+small, .small
   // Use font-size mixin to convert to percentage for YUI
   // http://developer.yahoo.com/yui/3/cssfonts/#fontsize
   // approx 85% when base-font-size eq 13px
   +font-size(11px)
+
+.quiet
+  color:                        #888
+  font-style:                   italic
+.ghost
+  color:                        #bbb
+  font-style:                   italic
 
 // Add the 'required' attribute on inputs if you want to use these
 input:valid, textarea:valid

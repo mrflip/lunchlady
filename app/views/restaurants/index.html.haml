@@ -1,13 +1,21 @@
 - title "Restaurants"
 
-%table.horizontal
+.right
+  %p.clear
+    Note: Global ratings aren't updated til you reload. Sorry bout that
+
+  %hr/  
+
+%table.horizontal.restaurants
   %tr
     %th.td_7    Name
-    %th         Phone
-    %th         Delivers?
-    %th         &nbsp;
-    %th         &nbsp;
-    %th         &nbsp;
+    %th.td_3         Phone
+    %th.td_1         Delivers?
+    %th.td_2         &nbsp;
+    %th.td_2         &nbsp;
+    %th.td_2         &nbsp;
+    %th.td_3         Your Rating
+    %th.td_3         Overall Rating
   - for restaurant in @restaurants
     %tr
       %td= link_to_rsrc restaurant
@@ -16,5 +24,7 @@
       %td= link_to 'website', restaurant.url,        :target => 'lunchlady_popup'
       %td= link_to 'menu',    restaurant.menu_url,   :target => 'lunchlady_popup'
       %td= link_to 'review',  restaurant.review_url, :target => 'lunchlady_popup'
+      %td.ratings= ratings_for restaurant, :show_user_rating => true
+      %td.ratings= ratings_for restaurant, :static
 
-.buttons= link_to "New Restaurant", new_restaurant_path(restaurant), :class => 'button'
+.buttons= link_to "New Restaurant", new_restaurant_path, :class => 'button'

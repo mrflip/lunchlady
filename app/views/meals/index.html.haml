@@ -1,14 +1,3 @@
 - title "Meals"
 
-%table.meals.horizontal
-  %tr
-    %th Meal
-    %th Restaurant
-    %th Order Count
-    %th 
-  - for meal in @meals
-    %tr
-      %td= link_to_rsrc meal
-      %td= link_to_rsrc meal.restaurant
-      %td= meal.orders.count
-      %td= link_to 'View meal', meal
+= render :partial => 'meals'

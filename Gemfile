@@ -23,22 +23,25 @@ gem 'devise', '~> 1.1'            # User management
 gem 'hpricot'                     # For Devise view generation
 gem 'ruby_parser'                 # For Devise view generation
 
-gem 'hassle',  :git => 'git://github.com/koppen/hassle.git'
+gem 'hassle',                :git => 'git://github.com/koppen/hassle.git'
 
-# Testing
-group :test do
-  gem 'rspec'
-  gem 'rspec-rails'
-  gem 'rcov'
-  gem 'forgery'
-  gem 'steak'
-  gem 'machinist'
-  gem 'pickle'
-  gem 'capybara'
-  gem 'delorean'
-  gem 'database_cleaner'
-  gem 'spork'
-end
+# Plugins (not handled by bundler, just listed here)
+# gem 'ajaxful_rating_jquery', :git => 'git://github.com/mrbrdo/ajaxful_rating_jquery.git'
+
+# # Testing
+# group :test do
+#   gem 'rspec'
+#   gem 'rspec-rails'
+#   gem 'rcov'
+#   gem 'forgery'
+#   gem 'steak'
+#   gem 'machinist'
+#   gem 'pickle'
+#   gem 'capybara'
+#   gem 'delorean'
+#   gem 'database_cleaner'
+#   gem 'spork'
+# end
 
 group :development do
   gem 'nifty-generators'            # Much better scaffolding
@@ -49,6 +52,7 @@ group :development do
   # platforms :ruby_18 do
   #   gem 'ruby-debug'
   # end
+  gem 'annotate'
 end
 
 group :console do

@@ -5,6 +5,16 @@ class Restaurant < ActiveRecord::Base
     :note)
   scope :alphabetically, order("restaurants.name ASC")
 
+  #
+  # Plugins
+  #
+
+  ajaxful_rateable :stars => 5
+
+  #
+  # Methods
+  #
+
   def titleize
     name
   end

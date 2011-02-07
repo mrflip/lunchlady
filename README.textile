@@ -27,6 +27,9 @@ h2. TODO
   - Average per-head order price
   - consensus rating.
 
+* Time of day vs. lunchtime vs. weekends
+* Do we want to be able to say "out of office"?
+
 ---------------------------------------------------------------------------
 
 !https://github.com/mrflip/lunchlady/raw/master/public/images/lunchlady_doris.png!
@@ -101,7 +104,10 @@ h4. Account
 * list all users:
   - all users (with link), email, avatar, number of orders, is_local
 * show any user:
-  - user info, user metrics, past orders
+  - user info
+  - user metrics
+  - rated restaurants
+  - past orders  
 * log out:
   - link on top when I'm signed in, not when I'm signed out.
 * log in:

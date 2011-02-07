@@ -4,9 +4,13 @@
   %tr
     %th         Name
     %td.td_12=  @restaurant.name
+    %td         Your rating:
+    %td.td_3.ratings= ratings_for @restaurant, :show_user_rating => true
   %tr
     %th         Phone
     %td=        @restaurant.phone
+    %td         Overall rating:
+    %td.td_3.ratings= ratings_for @restaurant, :static
   %tr
     %th=        link_to "Homepage", @restaurant.url
     %td=        link_to @restaurant.url, @restaurant.url

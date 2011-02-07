@@ -1,6 +1,7 @@
 class RestaurantsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_from_params, :only => [:show, :rate, :edit, :update, :destroy]
+  before_filter :ensure_current_slug_url, :only => :show
 
   def index
     @restaurants = Restaurant.alphabetically
@@ -62,5 +63,9 @@ private
 
   def find_from_params
     @restaurant = Restaurant.find(params[:id])
+  end
+
+  def ensure_current_slug_url
+    redirect_to @restaurant, :status => :moved_permanently unless @restaurant.friendly_id_status.best?
   end
 end

@@ -10,7 +10,7 @@ class Restaurant < ActiveRecord::Base
   #
   # Plugins
   #
-
+  has_friendly_id :name, :use_slug => true
   ajaxful_rateable :stars => 5
 
   #

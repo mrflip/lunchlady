@@ -1,3 +1,5 @@
+(Demo available at http://lunchladydemo.heroku.com -- do whatever you like over there; secret passphrase is "opensesame")
+
 At infochimps, we buy lunch for everyone in the office(*), and it's always a pain to wrangle everyone's order in on time.
 
 Hooray weekend app!
@@ -10,27 +12,31 @@ Lunchlady will
 
 Have some more Sloppy Joes!
 
-Until I get around to password protecting the app, you can "try it out":http://lunchlady.heroku.com at http://lunchlady.heroku.com thanks Heroku! The app is based on my fork of the "Greendog rails template.":https://github.com/mrflip/greendog-rails-template
+You can "try it out":http://lunchladydemo.heroku.com at http://lunchladydemo.heroku.com thanks Heroku!
 
 <em>(* One of many reasons you should "come work with us":http://infochimps.com/ -- there is such a thing as a free lunch!)</em>
 
 ---------------------------------------------------------------------------
 
-h2. TODO
+h2. Notes
 
-* make it so you have to type a magic word into the signup box to create a new account
-* Remember past orders for restaurant and suggest them to user (rails part works, but need javascript to inject into text field)
-* validations
-* http://infochimps.com/datasets/city-of-austin-restaurant-inspection-scores--2
-* Stats:
-  - Average per-head order price
+* Code for the lunchlady app is at https://github.com/infochimps/lunchlady
+* The app is based on my fork of the "Greendog rails template.":https://github.com/mrflip/greendog-rails-template
+* Built is in Rails 3 with devise; ajaxful_rating ("@mrbrdo & @kamui's jquery inflection":https://github.com/mrbrdo/ajaxful_rating_jquery); html5-boilerplate + compass + the compass 960.gs port + sass + hassle; friendly_id; "hashgrid.js":http://hashgrid.com/
 
-* Time of day vs. lunchtime vs. weekends
-* Do we want to be able to say "out of office"?
+Running:
 
-* --Vote for a restaurant--
-* --How long since we last ordered from a restaurant--
-* --consensus rating--
+<pre>
+  cd lunchlady
+  bundle install
+  rake db:migrate
+  rake db:seed    # optional, but loads a bunch of restaurants etc. Editdb/seeds.rb and db/seeds/*.tsv to suit
+  rails server
+</pre>
+
+You will want to set a signup shibboleth by editing config/app_config.yml. On heroku, you can instead set an environment variable
+
+@heroku config:add SIGNUP_SHIBBOLETH=your_watchword@
 
 ---------------------------------------------------------------------------
 
@@ -121,68 +127,19 @@ h4. Account
   - name, email, is_local
   - change password
 
-h4. Questions
-
-How to vote?
-* Star ratings on restaurants
-* Place a token to lobby for a restaurant to be chosen
-
 ---------------------------------------------------------------------------
 
+h2. TODO
 
-h2. Object Models
+* make it so you have to type a magic word into the signup box to create a new account
+* validations
+* http://infochimps.com/datasets/city-of-austin-restaurant-inspection-scores--2
+* Stats:
+  - Average per-head order price
+* Time of day vs. lunchtime vs. weekends
+* Do we want to be able to say "out of office"?
 
-User
-  name
-  email
-  --
-  has_many :orders
-  has_many :meals, :through => orders
-  has_many :votes
-  --
-  todays_meal
-
-restaurant
-  phone number
-  main url
-  meal form URL
-  address
-  tags
-  --
-  has_many :meals
-  has_many :orders, :through => meals
-
-order
-  restaurant_id
-  belongs_to :restaurant
-  has_many :orders
-  has_many :users, :through => :orders
-
-meal
-  user_id
-  meal_id
-  description
-  price
-  copay
-  guest_of
-  created_by
-  created_at
-  --
-  belongs_to :user
-  belongs_to :meal
-  has_one :restaurant, :through => :meal
-
-restaurant tags
-  tags
-  delivers
-  delivery_fee
-  tip_percent
-  discount_percent
-
-  restaurant inspection link
-  yelp link
-  
-user
-  is_guest
-
-  
+* --Remember past orders for restaurant and suggest them to user (rails part works, but need javascript to inject into text field)--
+* --Vote for a restaurant--
+* --How long since we last ordered from a restaurant--
+* --consensus rating--

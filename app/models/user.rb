@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # Attributes and scopes
   #
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :name, :username, :is_local
+  attr_accessible :name, :username, :is_local, :shibboleth
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
   #
   has_many :orders
@@ -18,6 +18,13 @@ class User < ActiveRecord::Base
   # Validations
   #
   validates :name,  :presence => true, :length => {:minimum => 1, :maximum => 100}
+
+  # require users to know a magic watchword to register. Set this value in
+  # config/app_config.yml or use an environment variable (on heroku, run
+  #    heroku config:add SIGNUP_SHIBBOLETH=your_shibboleth
+  #
+  SIGNUP_SHIBBOLETH = ENV['SIGNUP_SHIBBOLETH'] || APP_CONFIG[:signup_shibboleth]
+  validates_format_of :shibboleth, :with => /\A#{SIGNUP_SHIBBOLETH}\z/, :on => :create, :message => "is wrong. Lunchlady Doris frowns in your general direction. The right word, though, will endear you to the lunch lady and ensure some love with your chicken pot pie"
 
   #
   # Plugins

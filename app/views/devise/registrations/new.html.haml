@@ -20,6 +20,11 @@
     .form_input
       = f.label          :password_confirmation
       = f.password_field :password_confirmation
+    .form_input
+      = f.label          :shibboleth
+      = f.text_field     :shibboleth
+      %span.description.required
+        Please ask our office manager for the magic catchphrase to enter.
     .buttons= f.submit "Sign up"
       
 = render :partial => "devise/shared/links"

@@ -34,9 +34,8 @@ Running:
   rails server
 </pre>
 
-You will want to set a signup shibboleth by editing config/app_config.yml. On heroku, you can instead set an environment variable
-
-@heroku config:add SIGNUP_SHIBBOLETH=your_watchword@
+You will want to set a signup shibboleth by editing config/app_config.yml. On heroku, you can instead set an environment variable:
+  @heroku config:add SIGNUP_SHIBBOLETH=your_watchword@
 
 ---------------------------------------------------------------------------
 

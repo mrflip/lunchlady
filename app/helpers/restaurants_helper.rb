@@ -1,7 +1,7 @@
 module RestaurantsHelper
 
   def restaurant_links restaurant
-    raw([ ["Site", restaurant.url], ["Menu", restaurant.menu_url], ["Review", restaurant.review_url]
+    raw([ ["Site", restaurant.url], ["Review", restaurant.review_url], ["Menu", restaurant.menu_url]
     ].map{|t,l| link_to(t, l, :target => 'lunchlady_popup') if l.present? }.compact.join(" &middot; "))
   end
 

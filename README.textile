@@ -1,8 +1,6 @@
-(Demo available at http://lunchladydemo.heroku.com -- do whatever you like over there; secret passphrase is "opensesame")
+(Demo available at "http://lunchladydemo.heroku.com":http://lunchladydemo.heroku.com -- do whatever you like over there; secret passphrase is "opensesame")
 
-At infochimps, we buy lunch for everyone in the office(*), and it's always a pain to wrangle everyone's order in on time.
-
-Hooray weekend app!
+At infochimps, we buy lunch for everyone in the office(*), and it's always a pain to wrangle everyone's order in on time. **Hooray weekend app**!
 
 Lunchlady will
 
@@ -10,9 +8,7 @@ Lunchlady will
 * Remember everyone's past orders, if they don't get one in on time
 * Make your office manager happy, which is the secret to a successful business
 
-Have some more Sloppy Joes!
-
-You can "try it out":http://lunchladydemo.heroku.com at http://lunchladydemo.heroku.com thanks Heroku!
+You can "try it out here":http://lunchladydemo.heroku.com -- thanks Heroku!
 
 <em>(* One of many reasons you should "come work with us":http://infochimps.com/ -- there is such a thing as a free lunch!)</em>
 
@@ -24,7 +20,7 @@ h2. Notes
 * The app is based on my fork of the "Greendog rails template.":https://github.com/mrflip/greendog-rails-template
 * Built is in Rails 3 with devise; ajaxful_rating ("@mrbrdo & @kamui's jquery inflection":https://github.com/mrbrdo/ajaxful_rating_jquery); html5-boilerplate + compass + the compass 960.gs port + sass + hassle; friendly_id; "hashgrid.js":http://hashgrid.com/
 
-Running:
+To run the app
 
 <pre>
   cd lunchlady

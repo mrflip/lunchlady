@@ -16,11 +16,12 @@
     .form_input
       = f.label      :description
       = f.text_area  :description
-    .form_input{ :style => 'display:none' }
-      = select_tag(:previous_orders, options_for_select(@meal.restaurant.previous_order_descriptions(current_user).map{|o| [o.description, "%.2f"%o.price].to_json }.uniq))
     .form_input
       = f.label      :price
       = f.text_field :price
+    .form_input
+      - previous_orders_json = [["--previous orders--", ""]] + @meal.restaurant.previous_order_descriptions(current_user).map{|o| [o.description, "%.2f"%o.price].to_json }.uniq
+      = select_tag(:previous_orders, options_for_select(previous_orders_json))
     - if expanded
       .form_input
         = f.label      :copay
@@ -29,6 +30,7 @@
         - @order.guest_of ||= current_user 
         = f.label      :guest_of
         = f.select(:guest_of, User.alphabetically.map{|u| [ u.name, u.id ] })
+    %div#inplace_edit_banner
     .buttons
       = f.submit
       .right

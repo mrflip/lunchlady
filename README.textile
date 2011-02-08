@@ -1,6 +1,6 @@
 (Demo available at "http://lunchladydemo.heroku.com":http://lunchladydemo.heroku.com -- do whatever you like over there; secret passphrase is "opensesame")
 
-At infochimps, we buy lunch for everyone in the office(*), and it's always a pain to wrangle everyone's order in on time. **Hooray weekend app**!
+At infochimps, we buy lunch for everyone in the office(†), and it's always a pain to wrangle everyone's order in on time. *Hooray weekend app*!
 
 Lunchlady will
 
@@ -10,7 +10,7 @@ Lunchlady will
 
 You can "try it out here":http://lunchladydemo.heroku.com -- thanks Heroku!
 
-<em>(* One of many reasons you should "come work with us":http://infochimps.com/ -- there is such a thing as a free lunch!)</em>
+<em>(† One of many reasons you should "come work with us":http://infochimps.com/ -- there is such a thing as a free lunch!)</em>
 
 ---------------------------------------------------------------------------
 

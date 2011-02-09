@@ -17,7 +17,7 @@ class Meal < ActiveRecord::Base
   end
 
   def self.upcoming
-    (0 .. 6).map{|offset| Meal.for_date(Date.today + offset) }
+    (-3 .. 14).map{|offset| Meal.for_date(Date.today + offset) }
   end
 
   #

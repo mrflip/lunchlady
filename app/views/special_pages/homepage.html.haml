@@ -4,6 +4,14 @@
 .section
   - if user_signed_in?
     - if @meal.restaurant
+      %h2
+        = link_to "Today's Order", @meal
+        == ~~
+        = link_to_rsrc @meal.restaurant
+        == ~~
+        = restaurant_links(@meal.restaurant)
+
+      %hr/
       - @order = @meal.orders.for_user(current_user).first || @meal.orders.build(:user_id => current_user.id)
       = render :partial => '/orders/form', :locals => { :freeze_user_id => true }
     - else
@@ -14,7 +22,7 @@
     .buttons= link_to 'Sign in', new_user_session_path, :class => 'button'
     == or #{link_to 'Sign up', new_user_registration_path} to place an order
 
-  %hr/
+  %hr.spacer/
 
   = render '/meals/meals', :meals => (@meals = Meal.upcoming)
 

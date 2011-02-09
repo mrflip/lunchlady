@@ -3,34 +3,40 @@
 #main
   form
     .restaurant                        
-      .url     input[type="text"],         
-      .address textarea,                                        
-      .note    textarea                                         
+      .address textarea, .url input[type="text"], .note textarea
         +grid-width(14)                
       .address textarea                
-        height:                     8em
+        height:                 8em
     .order
       textarea                
         +grid-width(14)                
-        height:                     8em
+        height:                 8em
       
   form .order
     .meal
       +grid-width(22)
-      height: 2em
-      padding: 10px 10px
-      font-size:  14px
-      background-color: #eeeecc
+      height:                   2em
+      padding:                  10px 10px
+      font-size:                14px
+      background-color:         #eeeecc
       
   ul.ajaxful-rating
-    margin-top:                   4px
-    margin-bottom:                3px
-  table.has_ratings
-    td
-      padding-top:                8px
-      &.ratings
-        padding-top:              0px
-        padding-bottom:           0px
-  .user
-    .photo, .empty
-      border:                     none
+    margin-top:                 4px 
+    margin-bottom:              3px   
+  table.has_ratings                 
+    td                              
+      padding-top:              8px   
+      &.ratings                     
+        padding-top:            0px   
+        padding-bottom:         0px   
+  .user                             
+    .photo, .empty                  
+      border:                   none  
+
+  table.restaurants
+    th a
+      text-decoration:          none
+    .phone, .url
+      white-space:              nowrap
+    .rating_details
+      font-size:                10px

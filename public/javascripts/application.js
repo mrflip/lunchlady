@@ -8,4 +8,8 @@ $(document).ready(function() {
     $("#order_price"       ).val(description_and_price[1]);
     $("#inplace_edit_banner").text("Make sure to hit submit!")
   });
+
+  $('#show_rating_details').click(function() {
+    $('.rating_details').show();
+  });
 });

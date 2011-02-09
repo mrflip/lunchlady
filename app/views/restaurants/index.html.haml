@@ -8,21 +8,27 @@
 
 %table.horizontal.restaurants.has_ratings
   %tr
-    %th.td_7    Name
-    %th.td_3         Phone
-    %th.td_1         Delivers?
-    %th.td_4         Links
-    %th.td_3         Last Order
-    %th.td_3         Your Rating
-    %th.td_3         Overall Rating
+    %th.td_7            Name       
+    %th.td_3            Phone      
+    %th.td_1            Delivers?  
+    %th.td_4            Links      
+    %th.td_1            ago  
+    %th.td_3            Your Rating
+    %th.td_3
+      %span Overall Rating
+      %span.right#show_rating_details <a href="#">&raquo;</a>
+    %th.rating_details{ :style => 'display:none' } details
   - for restaurant in @restaurants
     %tr
-      %td= link_to_rsrc restaurant
-      %td= restaurant.phone
-      %td= delivery_status(restaurant, 'Y')
-      %td= restaurant_links(restaurant)
-      %td= restaurant.days_since_last_ordered
-      %td.ratings= ratings_for restaurant, :show_user_rating => true
-      %td.ratings= ratings_for restaurant, :static
+      %td=              link_to_rsrc restaurant
+      %td.phone=        restaurant.phone
+      %td.delivery=     delivery_status(restaurant, 'Y')
+      %td.url=          restaurant_links(restaurant)
+      %td.since=        restaurant.days_since_last_ordered
+      %td.ratings=      ratings_for restaurant, :show_user_rating => true
+      %td.ratings=      ratings_for restaurant, :static
+      %td.rating_details{ :style => 'display:none' }
+        - restaurant.rates.order('stars DESC').each do |rating|
+          %span{ :title => rating.rater.name }= rating.stars
 
 .buttons= link_to "New Restaurant", new_restaurant_path, :class => 'button'

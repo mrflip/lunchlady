@@ -16,7 +16,7 @@ You can "try it out here":http://lunchladydemo.heroku.com -- thanks Heroku!
 
 h2. Notes
 
-* Code for the lunchlady app is at https://github.com/infochimps/lunchlady
+* Code for the lunchlady app is at "https://github.com/infochimps/lunchlady":https://github.com/infochimps/lunchlady
 * The app is based on my fork of the "Greendog rails template.":https://github.com/mrflip/greendog-rails-template
 * Built is in Rails 3 with devise; ajaxful_rating ("@mrbrdo & @kamui's jquery inflection":https://github.com/mrbrdo/ajaxful_rating_jquery); html5-boilerplate + compass + the compass 960.gs port + sass + hassle; friendly_id; "hashgrid.js":http://hashgrid.com/
 

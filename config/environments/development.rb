@@ -18,7 +18,8 @@ Lunchlady::Application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
-
+  # # For fiddling with AjaxfulRating, uncomment this line and the one in
+  # # config/application.rb about config.autoload_paths
   # ActiveSupport::Dependencies.explicitly_unloadable_constants = ['AjaxfulRating']
 
   # Print deprecation notices to the Rails logger

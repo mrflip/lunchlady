@@ -1,5 +1,7 @@
 h1. Ajaxful Rating jQuery
 
+(renamed from ajaxful_rating_jquery to ajaxful_rating because it was crossing up rails)
+
 Provides a simple way to add rating functionality to your application. This fork uses jQuery instead of prototype and uses unobtrusive javascript. This fork only supports Rails 3.
 
 !http://s3.amazonaws.com/ember/v9SvvO3rdSkA40e1sXBf8JgpuaWCC0uB_o.png!

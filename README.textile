@@ -18,7 +18,7 @@ h2. Notes
 
 * Code for the lunchlady app is at "https://github.com/infochimps/lunchlady":https://github.com/infochimps/lunchlady
 * The app is based on my fork of the "Greendog rails template.":https://github.com/mrflip/greendog-rails-template
-* Built is in Rails 3 with devise; ajaxful_rating ("@mrbrdo & @kamui's jquery inflection":https://github.com/mrbrdo/ajaxful_rating_jquery); html5-boilerplate + compass + the compass 960.gs port + sass + hassle; friendly_id; "hashgrid.js":http://hashgrid.com/
+* Built in a weekend with emacs, heroku, infochimps and Rails 3; uses devise, ajaxful_rating ("@mrbrdo & @kamui's jquery inflection":https://github.com/mrbrdo/ajaxful_rating_jquery); html5-boilerplate + compass + the compass 960.gs port + sass + hassle; friendly_id; "hashgrid.js":http://hashgrid.com/
 
 To run the app
 
@@ -126,14 +126,16 @@ h4. Account
 
 h2. TODO
 
-* make it so you have to type a magic word into the signup box to create a new account
-* validations
-* http://infochimps.com/datasets/city-of-austin-restaurant-inspection-scores--2
 * Stats:
-  - Average per-head order price
+  - Average per-head order price of restaurant
+  - 'unfairness' rating of restaurants (Joe likes X a 5, everyone else a 2, how often should it cycle thru)
 * Time of day vs. lunchtime vs. weekends
 * Do we want to be able to say "out of office"?
+* Meals other than lunch
 
+* --add "restaurant inspections":http://infochimps.com/datasets/city-of-austin-restaurant-inspection-scores--2 from infochimps--
+* --make it so you have to type a magic word into the signup box to create a new account--
+* --validations--
 * --Remember past orders for restaurant and suggest them to user (rails part works, but need javascript to inject into text field)--
 * --Vote for a restaurant--
 * --How long since we last ordered from a restaurant--

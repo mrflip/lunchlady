@@ -1,0 +1,1 @@
+cat restaurant_scores.tsv | ruby -rubygems -rset -e 'rs=Set.new; require "chronic"; $stdin.readline; $stdin.each{|l| n,a,c,z,d,s = l.chomp.split(/ *\t/); dd = Chronic.parse(d).to_date rescue nil ; puts [n,a,c,z,dd,s].join("\t") unless rs.include?(n) ; rs << n } ' | wu-lign > ~/ics/apps/lunchlady/public/restaurants/inspection_scores 

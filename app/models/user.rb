@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :meals,      :through => :orders
 
   #
-  scope :local,          lambda{ where('(users.is_local IS NOT NULL)') }
+  scope :local,          lambda{ where(['users.is_local = ?', true]) }
   scope :alphabetically, order("users.name ASC")
   scope :by_id,          order("users.id ASC")
 

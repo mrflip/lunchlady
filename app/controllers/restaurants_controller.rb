@@ -8,6 +8,9 @@ class RestaurantsController < ApplicationController
     when 'my_rating'  then @restaurants = Restaurant.by_user_rating(current_user.id)
     when 'all_rating' then @restaurants = Restaurant.by_all_rating
     when 'name'       then @restaurants = Restaurant.alphabetically
+    when 'price'      then @restaurants = Restaurant.all.sort_by{|r| -(r.avg_price || 0) }
+    when 'ago'        then @restaurants = Restaurant.all.sort_by{|r| -(r.days_since_last_ordered || 0) }
+    when 'freq'       then @restaurants = Restaurant.all.sort_by{|r| -(r.frequency || 0) }
     else                   @restaurants = Restaurant.by_all_rating
     end
   end

@@ -37,6 +37,16 @@ class Restaurant < ActiveRecord::Base
     last_ordered_on && (Date.today - last_ordered_on).to_i
   end
 
+  def frequency
+    return if meals.count == 0
+    weeks_existing = ((Date.today - self.created_at.to_date).to_f + 7) / 365.25
+    (meals.count / weeks_existing).round
+  end
+
+  def avg_price
+    orders.average(:price)
+  end
+
   # Find previous orders from this restaurant;
   # * given user's orders first, most recent first;
   # * then other users' orders, most recent first

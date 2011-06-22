@@ -10,9 +10,9 @@
   %tr
     %th.td_7=           link_to('Name', restaurants_path( :order => 'name'))
     %th.td_3            Phone      
-    %th.td_1            Delivers?  
     %th.td_4            Links      
-    %th.td_1            ago  
+    %th.td_1=           link_to('ago',  restaurants_path( :order => 'ago'))
+    %th.td_1=           link_to('freq', restaurants_path( :order => 'freq'))
     %th.td_3=           link_to('Your Rating', restaurants_path( :order => 'my_rating'))
     %th.td_3
       %span= link_to('Overall Rating', restaurants_path( :order => 'all_rating'))
@@ -22,12 +22,14 @@
     %tr
       %td=              link_to_rsrc restaurant
       %td.phone=        restaurant.phone
-      %td.delivery=     delivery_status(restaurant, 'Y')
       %td.url=          restaurant_links(restaurant)
       %td.since=        restaurant.days_since_last_ordered
+      %td.frequency=    restaurant.frequency
       %td.ratings=      ratings_for restaurant, :show_user_rating => true
       %td.ratings=      ratings_for restaurant, :static
       %td.rating_details{ :style => 'display:none' }
+        -# = restaurant.avg_price && number_to_currency(restaurant.avg_price)
+        -# %br/
         - restaurant.rates.order('stars DESC').each do |rating|
           %span{ :title => rating.rater.name }= rating.stars
 

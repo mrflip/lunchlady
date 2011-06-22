@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   scope :local,          lambda{ where(['users.is_local = ?', true]) }
   scope :alphabetically, order("users.name ASC")
   scope :by_id,          order("users.id ASC")
+  scope :by_usage,       joins(:orders).group('users.id').order('count(*) DESC')
 
   #
   # Validations

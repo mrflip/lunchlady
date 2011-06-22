@@ -3,10 +3,14 @@ class Restaurant < ActiveRecord::Base
     :url, :menu_url, :inspection_url, :review_url,
     :delivers, :delivery_fee, :tip_percent, :discount_percent,
     :note)
-  scope :alphabetically, order("restaurants.name ASC")
+
   has_many :meals
   has_many :orders, :through => :meals
+  has_many :rates, :as => 'rateable'
 
+  scope :alphabetically, order("restaurants.name ASC")
+  scope :by_all_rating,  order('restaurants.rating_average DESC')
+  scope :by_user_rating, lambda{|u| includes('rates').where('rates.rater_id' => u).order('rates.stars DESC') }
   #
   # Plugins
   #

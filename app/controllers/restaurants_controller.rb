@@ -4,7 +4,12 @@ class RestaurantsController < ApplicationController
   before_filter :ensure_current_slug_url, :only => :show
 
   def index
-    @restaurants = Restaurant.alphabetically
+    case params[:order].to_s
+    when 'my_rating'  then @restaurants = Restaurant.by_user_rating(current_user.id)
+    when 'all_rating' then @restaurants = Restaurant.by_all_rating
+    when 'name'       then @restaurants = Restaurant.alphabetically
+    else                   @restaurants = Restaurant.by_all_rating
+    end
   end
 
   def show

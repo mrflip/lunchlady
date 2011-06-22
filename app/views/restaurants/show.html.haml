@@ -8,3 +8,14 @@
 %hr/
 
 =render '/meals/meals', :meals => (@meals = @restaurant.meals.by_recency)
+
+%hr.spacer/
+
+%table.horizontal.rates
+  %tr
+    %th.td_8    User
+    %th.td_17   Rating
+  - @restaurant.rates.order('stars DESC').each do |rating|
+    %tr
+      %td= rating.rater.titleize
+      %td= rating.stars

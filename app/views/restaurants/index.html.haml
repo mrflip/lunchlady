@@ -8,14 +8,14 @@
 
 %table.horizontal.restaurants.has_ratings
   %tr
-    %th.td_7            Name       
+    %th.td_7=           link_to('Name', restaurants_path( :order => 'name'))
     %th.td_3            Phone      
     %th.td_1            Delivers?  
     %th.td_4            Links      
     %th.td_1            ago  
-    %th.td_3            Your Rating
+    %th.td_3=           link_to('Your Rating', restaurants_path( :order => 'my_rating'))
     %th.td_3
-      %span Overall Rating
+      %span= link_to('Overall Rating', restaurants_path( :order => 'all_rating'))
       %span.right#show_rating_details <a href="#">&raquo;</a>
     %th.rating_details{ :style => 'display:none' } details
   - for restaurant in @restaurants

@@ -10,13 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 9) do
+ActiveRecord::Schema.define(:version => 10) do
 
   create_table "meals", :force => true do |t|
     t.date      "ordered_on"
     t.integer   "restaurant_id"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.boolean   "done",          :default => false
   end
 
   add_index "meals", ["ordered_on"], :name => "index_meals_on_ordered_on", :unique => true

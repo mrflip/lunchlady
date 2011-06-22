@@ -6,7 +6,7 @@
 =grid-tds($cols: $ninesixty-columns, $gutter-width: $ninesixty-gutter-width)
   @for $n from 1 through $cols
     .td_#{$n}
-      :width= ($n * $ninesixty-grid-width / $cols) - $ninesixty-gutter-width
+      width:            ($n * $ninesixty-grid-width / $cols) - $ninesixty-gutter-width
 
 
 

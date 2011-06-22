@@ -5,6 +5,10 @@
     .form_input
       = f.label :restaurant_id
       = f.select("restaurant_id", Restaurant.alphabetically.map{|r| [ r.name, r.id ] }, {:prompt => '-- (restaurant) --'})
+      (changing the restaurant will remove all orders)
+    .form_input    
+      = f.check_box :done
+      = f.label :done, 'Ordering is complete', :style => 'display: inline'
     .buttons
       = f.submit
       - if @meal.restaurant.present?

@@ -4,6 +4,7 @@ Lunchlady::Application.routes.draw do
   resources :meals, :only => [:index, :show, :edit, :update, :destroy] do
     resources :orders
   end
+  match 'meals/:id/done' => 'meals#done', :as => 'meal_done'
 
   resources :restaurants do
     post :rate, :on => :member

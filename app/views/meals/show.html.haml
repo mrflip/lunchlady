@@ -12,7 +12,10 @@
 %hr/
 
 .meal
-  - if user_signed_in?
+  - if @meal.done
+    .span{ :style => 'font-size: 1.5em; color: #955; font-style: italic' }
+      Ordering is complete -- see the lunchmeister to plead for grace.
+  - elsif user_signed_in?
     - @order = @meal.orders.for_user(current_user).first || @meal.orders.build(:user_id => current_user.id)
     = render :partial => '/orders/form', :locals => { :freeze_user_id => true, :hide_link_to_meal => true }
 
@@ -22,10 +25,9 @@
 
 .buttons
   = link_to "Order for Someone Else", new_meal_order_path(@meal), :class => 'button medium grid_5 clear'
+  - if @meal.done
+    accidentally hit the done button? hit "edit meal".
+  - else  
+    = link_to "DONE ORDERING",               meal_done_path(@meal), :class => 'button medium grid_5 warning'
+  = link_to "Edit Meal",      edit_meal_path(@meal),      :class => 'button medium grid_5 white'
 %br.clear/
-
-%hr.spacer/
-
-.buttons
-  = link_to "Change restaurant",      edit_meal_path(@meal),      :class => 'button medium white grid_5'
-  %div{ :style => 'padding-top: 7px' }  (will remove all orders)

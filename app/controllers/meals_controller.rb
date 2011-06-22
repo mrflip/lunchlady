@@ -1,6 +1,6 @@
 class MealsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_from_params, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_from_params, :only => [:show, :edit, :done, :update, :destroy]
 
   def index
     @meals = Meal.by_recency
@@ -18,6 +18,16 @@ class MealsController < ApplicationController
 
   def current
     @meal = Meal.current
+  end
+
+  def done
+    @meal.done = true
+    if @meal.save
+      flash[:notice] = "Successfully updated meal."
+      redirect_to @meal
+    else
+      render :action => 'edit'
+    end
   end
 
   def edit

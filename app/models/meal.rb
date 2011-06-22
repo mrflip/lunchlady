@@ -1,5 +1,5 @@
 class Meal < ActiveRecord::Base
-  attr_accessible :restaurant_id, :ordered_on
+  attr_accessible :restaurant_id, :ordered_on, :done
   belongs_to      :restaurant
   has_many        :orders, :dependent => :destroy
 

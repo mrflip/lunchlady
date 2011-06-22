@@ -48,11 +48,11 @@ class Restaurant < ActiveRecord::Base
   end
 
   def lovers()      rates.where('stars = 5') ; end
-  def lover_names() lovers.map(&:rater).map(&:titleize).join(', ') ; end
+  def lover_names() lovers.map(&:rater).compact.map(&:titleize).join(', ') ; end
   def loves()       lovers.present? ? lovers.count : ''  ; end
 
   def haters()      rates.where('stars = 1') ; end
-  def hater_names() haters.map(&:rater).map(&:titleize).join(', ') ; end
+  def hater_names() haters.map(&:rater).compact.map(&:titleize).join(', ') ; end
   def hates()       haters.present? ? haters.count : ''  ; end
 
   # Find previous orders from this restaurant;

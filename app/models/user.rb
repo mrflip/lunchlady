@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   #
   has_many :orders
   has_many :meals,      :through => :orders
+  has_many :rates, :foreign_key => 'rater_id'
 
   #
   scope :local,          lambda{ where(['users.is_local = ?', true]) }

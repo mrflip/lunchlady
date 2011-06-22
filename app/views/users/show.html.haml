@@ -17,16 +17,26 @@
     %td=        @user.is_local ? "Works in office" : "Only occasionally orders"
   %tr
     %td.empty   &nbsp;
+
+      
+%table.horizontal.rates
+  %tr
+    %th.td_8    Restaurant
+    %th.td_17   Rating
+  - @user.rates.sort_by{|r| r.rateable.titleize }.each do |rating|
+    %tr
+      %td= rating.rateable.titleize
+      %td= rating.stars
+
+%hr.spacer
     
 %table.horizontal.orders
   %tr
     %th.td_4    Meal
     %th.td_4    Restaurant
     %th.td_17   Order
-  - @user.orders.each do |order|
+  - @user.orders.recent_first.each do |order|
     %tr
       %td= link_to_rsrc order.meal
       %td= order.meal.restaurant_name if order.meal
       %td= link_to order.description, [order.meal, order]
-      
-      

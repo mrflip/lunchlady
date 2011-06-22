@@ -27,8 +27,10 @@
       %td.url=          restaurant_links(restaurant)
       %td.since=        restaurant.days_since_last_ordered
       %td.frequency=    restaurant.frequency
-      %td.love=         restaurant.loves
-      %td.hate=         restaurant.hates
+      %td.love
+        %span{ :title => restaurant.lover_names }= restaurant.loves
+      %td.hate
+        %span{ :title => restaurant.hater_names }= restaurant.hates
       %td.ratings=      ratings_for restaurant, :show_user_rating => true
       %td.ratings=      ratings_for restaurant, :static
       %td.rating_details{ :style => 'display:none' }

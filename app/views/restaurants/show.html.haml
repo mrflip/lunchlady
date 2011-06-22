@@ -17,5 +17,5 @@
     %th.td_17   Rating
   - @restaurant.rates.order('stars DESC').each do |rating|
     %tr
-      %td= rating.rater.titleize
+      %td= rating.rater ? rating.rater.titleize : ''
       %td= rating.stars

@@ -12,10 +12,7 @@
 %hr/
 
 .meal
-  - if @meal.done
-    .span{ :style => 'font-size: 1.5em; color: #955; font-style: italic' }
-      Ordering is complete -- see the lunchmeister to plead for grace.
-  - elsif user_signed_in?
+  - if user_signed_in?
     - @order = @meal.orders.for_user(current_user).first || @meal.orders.build(:user_id => current_user.id)
     = render :partial => '/orders/form', :locals => { :freeze_user_id => true, :hide_link_to_meal => true }
 

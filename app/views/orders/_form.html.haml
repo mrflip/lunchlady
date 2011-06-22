@@ -3,39 +3,49 @@
 - expanded          ||= false
 - orderer_str = case when freeze_user_id && user_signed_in? && (@order.user_id == current_user.id) then " for you" when freeze_user_id && @order.user then " for " + @order.user.name else "" end
 
-= form_for [@meal, @order] do |f|
-  %fieldset.order
-    = f.error_messages
-    %legend== Order#{orderer_str} from #{@meal.restaurant_name} on #{link_to_rsrc @meal}
-    - if freeze_user_id
-      = f.hidden_field   :user_id
-    - else
+- if @meal.done
+  .span{ :style => 'font-size: 1.5em; color: #955; font-style: italic; margin-bottom: 1em;' }
+    Ordering is complete -- see the lunchmeister to plead for grace.
+  .order
+    == You ordered #{@order.description} for #{@order.price}
+    = if(@order.copay)    then "(copay: #{@order.copay})" ; end
+    = if(@order.guest_of) then "(guest of: #{@order.guest_of})" ; end
+    == from #{@meal.restaurant_name} on #{link_to_rsrc @meal}    
+- else
+  = form_for [@meal, @order] do |f|
+    %fieldset.order
+      = f.error_messages
+      %legend== Order#{orderer_str} from #{@meal.restaurant_name} on #{link_to_rsrc @meal}
+      - if freeze_user_id
+        = f.hidden_field   :user_id
+      - else
+        .form_input
+          = f.label      :user_id
+          = f.select("user_id", User.alphabetically.map{|u| [ u.name, u.id ] })
       .form_input
-        = f.label      :user_id
-        = f.select("user_id", User.alphabetically.map{|u| [ u.name, u.id ] })
-    .form_input
-      = f.label      :description
-      = f.text_area  :description
-    .form_input
-      = f.label      :price
-      = f.text_field :price
-    .form_input
-      - previous_orders_json = [["--previous orders--", ""]] + @meal.restaurant.previous_order_descriptions(current_user).map{|o| [o.description, "%.2f"%o.price].to_json }.uniq
-      = select_tag(:previous_orders, options_for_select(previous_orders_json))
-    - if expanded
+        = f.label      :description
+        = f.text_area  :description
       .form_input
-        = f.label      :copay
-        = f.text_field :copay
+        = f.label      :price
+        = f.text_field :price
       .form_input
-        - @order.guest_of ||= current_user 
-        = f.label      :guest_of
-        = f.select(:guest_of, User.alphabetically.map{|u| [ u.name, u.id ] })
-    %div#inplace_edit_banner
-    .buttons
-      = f.submit
-      .right
-        - unless hide_link_to_meal
-          = link_to "View all orders for this meal", @meal
-        - unless @order.new_record?
-          = raw("&middot;") unless hide_link_to_meal
-          = link_to "Delete this order", [@meal, @order], :confirm => 'Are you sure?', :method => :delete 
+        - previous_orders_json = [["--previous orders--", ""]] + @meal.restaurant.previous_order_descriptions(current_user).map{|o| [o.description, "%.2f"%o.price].to_json }.uniq
+        = select_tag(:previous_orders, options_for_select(previous_orders_json))
+      - if expanded
+        .form_input
+          = f.label      :copay
+          = f.text_field :copay
+        .form_input
+          - @order.guest_of ||= current_user 
+          = f.label      :guest_of
+          = f.select(:guest_of, User.alphabetically.map{|u| [ u.name, u.id ] })
+      %div#inplace_edit_banner
+      .buttons
+        = f.submit
+        .right
+          - unless hide_link_to_meal
+            = link_to "View all orders for this meal", @meal
+          - unless @order.new_record?
+            = raw("&middot;") unless hide_link_to_meal
+            = link_to "Delete this order", [@meal, @order], :confirm => 'Are you sure?', :method => :delete 
+  

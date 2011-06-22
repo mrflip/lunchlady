@@ -11,10 +11,11 @@ class User < ActiveRecord::Base
   has_many :rates, :foreign_key => 'rater_id'
 
   #
+  def self.group_by_dummy_cols() self.column_names.map{|c| "users.#{c}" }.join(",") ; end
   scope :local,          lambda{ where(['users.is_local = ?', true]) }
   scope :alphabetically, order("users.name ASC")
   scope :by_id,          order("users.id ASC")
-  scope :by_usage,       joins(:orders).group('users.id').order('count(*) DESC')
+  scope :by_usage,       joins(:orders).group("users.id, #{group_by_dummy_cols}").order('count(*) DESC')
 
   #
   # Validations

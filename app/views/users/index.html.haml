@@ -9,9 +9,9 @@
 %table.users.horizontal
   %tr
     %th &nbsp;
-    %th Name
-    %th Email
-    %th Is local
+    %th= link_to 'Name', users_path(:order => 'name')
+    %th  Email
+    %th= link_to 'Is Local', users_path(:order => 'usage')
   - for user in @users
     %tr.hcard
       %td.photo=        image_tag avatar_url(user)

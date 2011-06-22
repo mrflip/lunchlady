@@ -40,7 +40,7 @@ input:valid, textarea:valid
 
 input:invalid, textarea:invalid
   +border-radius(1px)
-  +box-shadow(red, 0, 0, 5px, 0)
+  +box-shadow('red 0 0 5px 0')
 
 .no-boxshadow input:invalid,
 .no-boxshadow textarea:invalid
@@ -121,7 +121,7 @@ header
   background-color:       	#456989
   border-top:             	1px solid #87abc8
   border-bottom:          	1px solid #e0e8f0
-  +linear-gradient(color-stops(#7599b9, #456989))
+  @include background-image(linear-gradient(#7599b9, #456989))
   color:                  	#fff
   padding:                	4px 0
   margin-bottom:                4px

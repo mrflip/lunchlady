@@ -20,16 +20,16 @@ $flash_success_color:  #baffba
     color: $flash_notice_color - #888
     border-color: $flash_notice_color - #333
     background-color: $flash_notice_color
-    +linear-gradient(color-stops($flash_notice_color + #111, $flash_notice_color - #111))
+    @include background-image(linear-gradient(color-stops($flash_notice_color + #111, $flash_notice_color - #111))
 
   .alert
     color: $flash_alert_color - #888
     border-color: $flash_alert_color - #333
     background-color: $flash_alert_color
-    +linear-gradient(color-stops($flash_alert_color + #111, $flash_alert_color - #111))
+    @include background-image(linear-gradient(color-stops($flash_alert_color + #111, $flash_alert_color - #111))
 
   .success
     color: $flash_success_color - #888
     border-color: $flash_success_color - #333
     background-color: $flash_success_color
-    +linear-gradient(color-stops($flash_success_color + #111, $flash_success_color - #111))
+    @include background-image(linear-gradient(color-stops($flash_success_color + #111, $flash_success_color - #111))

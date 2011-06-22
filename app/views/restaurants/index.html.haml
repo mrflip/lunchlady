@@ -13,6 +13,8 @@
     %th.td_4            Links      
     %th.td_1=           link_to('ago',  restaurants_path( :order => 'ago'))
     %th.td_1=           link_to('freq', restaurants_path( :order => 'freq'))
+    %th.td_char         <span title="love">&#x2764;</span>
+    %th.td_char         <span title="love">&#x2620;</span>
     %th.td_3=           link_to('Your Rating', restaurants_path( :order => 'my_rating'))
     %th.td_3
       %span= link_to('Overall Rating', restaurants_path( :order => 'all_rating'))
@@ -25,6 +27,8 @@
       %td.url=          restaurant_links(restaurant)
       %td.since=        restaurant.days_since_last_ordered
       %td.frequency=    restaurant.frequency
+      %td.love=         restaurant.loves
+      %td.hate=         restaurant.hates
       %td.ratings=      ratings_for restaurant, :show_user_rating => true
       %td.ratings=      ratings_for restaurant, :static
       %td.rating_details{ :style => 'display:none' }

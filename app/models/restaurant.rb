@@ -47,6 +47,16 @@ class Restaurant < ActiveRecord::Base
     orders.average(:price)
   end
 
+  def loves
+    lct = rates.where('stars = 5').count
+    lct == 0 ? nil : lct
+  end
+
+  def hates
+    lct = rates.where('stars = 1').count
+    lct == 0 ? nil : lct
+  end
+
   # Find previous orders from this restaurant;
   # * given user's orders first, most recent first;
   # * then other users' orders, most recent first

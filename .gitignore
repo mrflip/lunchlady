@@ -48,3 +48,5 @@ public/system/*
 ## PROJECT::SPECIFIC
 public/stylesheets/style.css
 public/stylesheets/handheld.css
+
+.vendor

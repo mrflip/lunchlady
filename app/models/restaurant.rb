@@ -64,6 +64,7 @@ class Restaurant < ActiveRecord::Base
     rate_t90d = 0.5 if rate_t90d < 0.5
     expected_rate / rate_t90d
   end
+  def timeliness_str()  timeliness ? timeliness.round.to_s : '' ; end
 
   def self.by_timeliness
     all.sort_by{|r| [- (r.timeliness||0), r.rate_average] }

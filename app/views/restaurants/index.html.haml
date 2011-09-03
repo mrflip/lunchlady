@@ -25,8 +25,8 @@
       %td=              link_to_rsrc restaurant
       %td.phone=        restaurant.phone
       %td.url=          restaurant_links(restaurant)
-      %td.since=        restaurant.timeliness ? ("%7.2f" % restaurant.timeliness) : ''
-      %td.frequency=    restaurant.frequency  ? ("%7.2f" % restaurant.frequency) : ''
+      %td.due=          restaurant.timeliness_str
+      %td.frequency=    restaurant.frequency  ? ("%7.1f" % restaurant.frequency) : ''
       %td.love
         %span{ :title => restaurant.lover_names }= restaurant.loves
       %td.hate

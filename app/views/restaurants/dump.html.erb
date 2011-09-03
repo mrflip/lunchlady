@@ -3,4 +3,5 @@ dump:
 <pre>
 <%= "%-15s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % %w[name rating n_90 n_150 freq loves hates rates ago timel] %>
 <%- for restaurant in @restaurants %>
-<%= restaurant_dump(restaurant)   $>
+<%= restaurant_dump(restaurant)   %>
+<%- end %>

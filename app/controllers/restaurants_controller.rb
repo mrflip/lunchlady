@@ -16,6 +16,10 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def dump
+    @restaurants = Restaurant.by_all_rating
+  end
+
   def show
   end
 

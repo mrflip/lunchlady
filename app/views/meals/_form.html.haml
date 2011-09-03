@@ -4,7 +4,7 @@
     %legend= @title
     .form_input
       = f.label :restaurant_id
-      = f.select("restaurant_id", Restaurant.by_timeliness.map{|r| [ r.name, r.id ] }, {:prompt => '-- (restaurant) --'})
+      = f.select("restaurant_id", Restaurant.by_timeliness.map{|r| [ [r.timeliness_str, r.name].join(' '), r.id ] }, {:prompt => '-- (restaurant) --'})
       (changing the restaurant will remove all orders)
     .form_input    
       = f.check_box :done

@@ -15,4 +15,19 @@ module RestaurantsHelper
     ordered_on_date = restaurant.last_ordered_on or return "--"
     "#{time_ago_in_words(ordered_on_date)} ago"
   end
+
+  def restaurant_dump(restaurant)
+    [
+      "%-15s" % [ restaurant.name.to_s[0..14] ],
+      "%7.2f" % [ restaurant.rate_average ],
+      "%7.2f" % [ (restaurant.meals_count_since( 90) / 3.0) ],
+      "%7.2f" % [ (restaurant.meals_count_since(150) / 5.0) ],
+      restaurant.frequency ? "%7.2f" % [ restaurant.frequency ] : nil,
+      restaurant.loves,
+      restaurant.hates,
+      restaurant.raters.count,
+      restaurant.days_since_last_ordered,
+      restaurant.timeliness && ("%7.2f" % [ restaurant.timeliness ]),
+    ].join("\t")
+  end
 end

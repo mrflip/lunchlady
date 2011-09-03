@@ -11,7 +11,7 @@
     %th.td_7=           link_to('Name', restaurants_path( :order => 'name'))
     %th.td_3            Phone      
     %th.td_4            Links      
-    %th.td_1=           link_to('ago',  restaurants_path( :order => 'ago'))
+    %th.td_1=           link_to('due',  restaurants_path( :order => 'timeliness'))
     %th.td_1=           link_to('freq', restaurants_path( :order => 'freq'))
     %th.td_char         <span title="love">&#x2764;</span>
     %th.td_char         <span title="hate">&#x2620;</span>
@@ -25,8 +25,8 @@
       %td=              link_to_rsrc restaurant
       %td.phone=        restaurant.phone
       %td.url=          restaurant_links(restaurant)
-      %td.since=        restaurant.days_since_last_ordered
-      %td.frequency=    restaurant.frequency
+      %td.since=        restaurant.timeliness ? ("%7.2f" % restaurant.timeliness) : ''
+      %td.frequency=    restaurant.frequency  ? ("%7.2f" % restaurant.frequency) : ''
       %td.love
         %span{ :title => restaurant.lover_names }= restaurant.loves
       %td.hate

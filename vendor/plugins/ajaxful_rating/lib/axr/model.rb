@@ -111,9 +111,10 @@ module AjaxfulRating # :nodoc:
         "INNER JOIN rates r ON u.id = r.rater_id WHERE "
 
       sql << self.class.send(:sanitize_sql_for_conditions, {
-        :rateable_id => id,
-        :rateable_type => self.class.base_class.name,
-        :dimension => (dimension.to_s if dimension)
+          :rateable_id   => id,
+          :rateable_type => self.class.base_class.name,
+          :dimension     => (dimension.to_s if dimension),
+          'u.is_local'   => true,
       }, 'r')
 
       self.class.user_class.find_by_sql(sql)
@@ -166,7 +167,7 @@ module AjaxfulRating # :nodoc:
       unless dimension.blank?
         send("#{dimension}_rates")
       else
-        rates_without_dimension
+        rates_without_dimension.joins(:rater) & User.local
       end
     end
 

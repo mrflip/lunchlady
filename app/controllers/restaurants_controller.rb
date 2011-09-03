@@ -11,6 +11,7 @@ class RestaurantsController < ApplicationController
     when 'price'      then @restaurants = Restaurant.all.sort_by{|r| -(r.avg_price || 0) }
     when 'ago'        then @restaurants = Restaurant.all.sort_by{|r| -(r.days_since_last_ordered || 0) }
     when 'freq'       then @restaurants = Restaurant.all.sort_by{|r| -(r.frequency || 0) }
+    when 'timeliness' then @restaurants = Restaurant.by_timeliness
     else                   @restaurants = Restaurant.by_all_rating
     end
   end

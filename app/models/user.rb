@@ -8,11 +8,11 @@ class User < ActiveRecord::Base
   #
   has_many :orders
   has_many :meals,      :through => :orders
-  has_many :rates, :foreign_key => 'rater_id'
+  has_many :rates,      :foreign_key => 'rater_id'
 
   #
   def self.group_by_dummy_cols() self.column_names.map{|c| "users.#{c}" }.join(",") ; end
-  scope :local,          lambda{ where(['users.is_local = ?', true]) }
+  scope :local,          where(['users.is_local = ?', true])
   scope :alphabetically, order("users.name ASC")
   scope :by_id,          order("users.id ASC")
   scope :by_usage,       joins(:orders).group("users.id, #{group_by_dummy_cols}").order('users.is_local DESC, count(*) DESC')

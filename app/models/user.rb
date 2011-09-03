@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   scope :local,          lambda{ where(['users.is_local = ?', true]) }
   scope :alphabetically, order("users.name ASC")
   scope :by_id,          order("users.id ASC")
-  scope :by_usage,       joins(:orders).group("users.id, #{group_by_dummy_cols}").order('count(*) DESC')
+  scope :by_usage,       joins(:orders).group("users.id, #{group_by_dummy_cols}").order('users.is_local DESC, count(*) DESC')
 
   #
   # Validations
@@ -48,6 +48,10 @@ class User < ActiveRecord::Base
 
   def titleize
     name
+  end
+
+  def short_name
+    name.gsub(/^(\w+\W+\w).*/, '\1')
   end
 
   def current_meal

@@ -29,8 +29,7 @@
         = f.label      :price
         = f.text_field :price
       .form_input
-        - previous_orders_json = [["--previous orders--", ""]] + @meal.restaurant.previous_order_descriptions(current_user).map{|o| [o.description, "%.2f"%o.price].to_json }.uniq
-        = select_tag(:previous_orders, options_for_select(previous_orders_json))
+        = select_tag(:previous_orders, options_for_select(@meal.restaurant.previous_order_descriptions(current_user)))
       - if expanded
         .form_input
           = f.label      :copay

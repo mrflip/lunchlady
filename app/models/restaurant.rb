@@ -58,8 +58,11 @@ class Restaurant < ActiveRecord::Base
   # Find previous orders from this restaurant;
   # * given user's orders first, most recent first;
   # * then other users' orders, most recent first
-  def previous_order_descriptions user
-    orders.order("(orders.user_id = #{user.id}) DESC, orders.created_at DESC")
+  def previous_order_descriptions(user)
+    prev_orders   = orders.includes(:user).where(['users.is_local = ?', true]).order("(orders.user_id = #{user.id}) DESC, orders.user_id ASC, orders.created_at DESC")
+    descriptions  = [['', '--previous orders--', '']]
+    descriptions += prev_orders.map{|o| [o.user.short_name, o.description[0..100].gsub(/[\r\n\t]+/, ' ').strip, "%.2f"%o.price].to_json }
+    descriptions.uniq
   end
 end
 

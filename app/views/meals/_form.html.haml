@@ -1,22 +1,24 @@
-= form_for @meal do |f|
-  %fieldset
-    = f.error_messages
-    %legend= @title
-    .form_input
-      = f.label :restaurant_id
-      = f.select("restaurant_id", timeliness_selector_text(Restaurant.awesome), {:prompt => '-- (restaurant) --'})
-      - if @meal.restaurant
-        (changing the restaurant will remove all orders)
-    .form_input    
-      = f.check_box :done
-      = f.label :done, 'Ordering is complete', :style => 'display: inline'
-    .buttons
-      = f.submit
-      - if @meal.restaurant.present?
-        .right
-          = link_to "Delete this meal", @meal, :confirm => 'Are you sure?', :method => :delete 
-
-%p.quiet
+- cache([restaurant, 'new_order_for_restaurant']) do
+  = form_for @meal do |f|
+    %fieldset
+      = f.error_messages
+      %legend= @title
+      .form_input
+        = f.label :restaurant_id
+        = f.select("restaurant_id", timeliness_selector_text(Restaurant.awesome), {:prompt => '-- (restaurant) --'})
+        - if @meal.restaurant
+          (changing the restaurant will remove all orders)
+      .form_input    
+        = f.check_box :done
+        = f.label :done, 'Ordering is complete', :style => 'display: inline'
+      .buttons
+        = f.submit
+        - if @meal.restaurant.present?
+          .right
+            = link_to "Delete this meal", @meal, :confirm => 'Are you sure?', :method => :delete 
   
-  Restaurants are prioritized by how often we've eaten there recently, the
-  average rating, and the number of love/hate (5-star/1-star) ratings.
+  %p.quiet
+    
+    Restaurants are prioritized by how often we've eaten there recently, the
+    average rating, and the number of love/hate (5-star/1-star) ratings.
+  

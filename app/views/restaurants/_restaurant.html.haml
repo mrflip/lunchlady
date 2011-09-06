@@ -1,18 +1,18 @@
-- cache([restaurant, :compact, current_user.id]) do
+- cache([@restaurant, :compact, current_user.id]) do
   %table.vertical.restaurant.has_ratings
     %tr
       %th         Name
       %td.td_12=  @restaurant.name
       %td         Your rating:
       %td.td_3.ratings
-        - cache_for_current_user(restaurant, 'ratings_for') do
+        - cache_for_current_user(@restaurant, 'ratings_for') do
           = ratings_for @restaurant, :show_user_rating => true
     %tr
       %th         Phone
       %td=        @restaurant.phone
       %td         Overall rating:
       %td.td_3.ratings
-        - cache([restaurant, 'ratings_for', :all]) do
+        - cache([@restaurant, 'ratings_for', :all]) do
           = ratings_for @restaurant, :static
     %tr
       %th         Links

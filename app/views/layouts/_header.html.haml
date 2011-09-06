@@ -1,13 +1,15 @@
-.box
-  .sitelink
-    %h1= link_to "Lunchlady", '/'
-    mmmm...
-
-  %ul.menu
-    - if user_signed_in?
-      %li.hello=  link_to "Hello, #{current_user.titleize}", edit_user_registration_path
-      %li.signup= link_to 'logout',  destroy_user_session_path
-    - else
-      %li.grid_3.alpha &nbsp;
-      %li.signup= link_to 'signup', new_user_registration_path
-      %li.signup= link_to 'login',  new_user_session_path
+- cache_for_current_user(:layout_header) do
+  .box
+    .sitelink
+      %h1= link_to "Lunchlady", '/'
+      mmmm...
+  
+    %ul.menu
+      - if user_signed_in?
+        %li.hello=  link_to "Hello, #{current_user.titleize}", edit_user_registration_path
+        %li.signup= link_to 'logout',  destroy_user_session_path
+      - else
+        %li.grid_3.alpha &nbsp;
+        %li.signup= link_to 'signup', new_user_registration_path
+        %li.signup= link_to 'login',  new_user_session_path
+  

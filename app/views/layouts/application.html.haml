@@ -12,5 +12,6 @@
         = yield
       %footer#footer
         = render :partial => 'layouts/footer'
-    -# Javascript at the bottom for fast page loading
+    :javascript
+      var csrf_token = #{form_authenticity_token.inspect};
     = render :partial => 'layouts/javascripts'

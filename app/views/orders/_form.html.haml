@@ -29,7 +29,8 @@
         = f.label      :price
         = f.text_field :price
       .form_input
-        = select_tag(:previous_orders, options_for_select(@meal.restaurant.previous_order_descriptions(current_user)))
+        - cache([@meal.restaurant, 'previous_orders', current_user.id]) do
+          = select_tag(:previous_orders, options_for_select(@meal.restaurant.previous_order_descriptions(current_user)))
       - if expanded
         .form_input
           = f.label      :copay

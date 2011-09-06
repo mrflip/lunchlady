@@ -24,22 +24,27 @@
       %span.right#show_rating_details <a href="#">&raquo;</a>
     %th.rating_details{ :style => 'display:none' } details
   - for restaurant in @restaurants
-    %tr.restaurant{ :class => [(restaurant.uncool? ? 'uncool' : nil)].join(' ') }
-      %td=              link_to_rsrc restaurant
-      %td.phone=        restaurant.phone
-      %td.url=          restaurant_links(restaurant)
-      %td.frequency=    restaurant.frequency  ? ("%.1f" % restaurant.frequency) : ''
-      %td.due=          restaurant.timeliness_str
-      %td.love          <span title="#{restaurant.lover_names}">#{restaurant.loves}</span>
-      %td.hate          <span title="#{restaurant.hater_names}">#{restaurant.hates}</span>
-      - if params[:show_price].to_s == 'true'
-        %td.price=      restaurant.avg_price && number_to_currency(restaurant.avg_price)
-      %td.ratings=      ratings_for restaurant, :show_user_rating => true
-      %td.ratings=      ratings_for restaurant, :static
-      %td.rating_details{ :style => 'display:none' }
-        - restaurant.rates.order('stars DESC').each do |rating|
-          %span{ :title => rating.rater.name }= rating.stars
-
+    - cache_for_current_user(restaurant, 'table_row') do
+      %tr.restaurant{ :class => [(restaurant.uncool? ? 'uncool' : nil)].join(' ') }
+        %td=              link_to_rsrc restaurant
+        %td.phone=        restaurant.phone
+        %td.url=          restaurant_links(restaurant)
+        %td.frequency=    restaurant.frequency  ? ("%.1f" % restaurant.frequency) : ''
+        %td.due=          restaurant.timeliness_str
+        %td.love          <span title="#{restaurant.lover_names}">#{restaurant.loves}</span>
+        %td.hate          <span title="#{restaurant.hater_names}">#{restaurant.hates}</span>
+        - if params[:show_price].to_s == 'true'
+          %td.price=      restaurant.avg_price && number_to_currency(restaurant.avg_price)
+        %td.ratings
+          - cache_for_current_user(restaurant, 'ratings_for') do
+            = ratings_for restaurant, :show_user_rating => true
+        %td.ratings
+          - cache([restaurant, 'ratings_for', :all]) do
+            = ratings_for restaurant, :static
+        %td.rating_details{ :style => 'display:none' }
+          - restaurant.rates.order('stars DESC').each do |rating|
+            %span{ :title => rating.rater.name }= rating.stars
+    
 .buttons
   = link_to "New Restaurant", new_restaurant_path, :class => 'button'
 = link_to "City of Austin Restaurant Inspection Sscores", "/restaurants/inspection_scores"

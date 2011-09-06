@@ -1,5 +1,7 @@
-.box
-  %ul.menu
-    %li.item= link_to 'Meals',       meals_path
-    %li.item= link_to 'Restaurants', restaurants_path
-    %li.item= link_to 'Users',       users_path
+- cache(:layout_nav) do
+  .box
+    %ul.menu
+      %li.item= link_to 'Meals',       meals_path
+      %li.item= link_to 'Restaurants', restaurants_path
+      %li.item= link_to 'Users',       users_path
+  

@@ -12,4 +12,30 @@ $(document).ready(function() {
   $('#show_rating_details').click(function() {
     $('.rating_details').show();
   });
+            
+  // Always send the authenticity_token with ajax
+  $(document).ajaxSend(function(event, request, settings) {
+    if ( settings.type == 'post' ) {
+      settings.data = (settings.data ? settings.data + "&" : "")
+        + "authenticity_token=" + encodeURIComponent( csrf_token );
+    }
+  });
+  
+  $('.ajaxful-rating a').click(function(){
+    $.ajax({
+      type: $(this).attr('data-method'),
+      url: $(this).attr('href'),
+      data: {
+        stars: $(this).attr('data-stars'),
+        dimension: $(this).attr('data-dimension'),
+        size: $(this).attr('data-size'),
+        show_user_rating: $(this).attr('data-show_user_rating')
+      },
+      success: function(response){
+        $('#' + response.id + ' .show-value').css('width', response.width + '%');
+      }
+    });
+    return false;
+  });
+
 });

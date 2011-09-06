@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_meal_from_params
   before_filter :find_from_params,         :only => [:show, :edit, :update, :destroy]
+  cache_sweeper :order_sweeper
 
   def index
     @orders = Order.all

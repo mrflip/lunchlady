@@ -2,6 +2,7 @@ class RestaurantsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_from_params, :only => [:show, :rate, :edit, :update, :destroy]
   before_filter :ensure_current_slug_url, :only => :show
+  cache_sweeper :restaurant_sweeper
 
   def index
     case params[:order].to_s

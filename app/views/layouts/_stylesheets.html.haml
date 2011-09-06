@@ -1,10 +1,10 @@
--# CSS : implied media="all"
-= stylesheet_link_tag 'style', :media => 'all'
-
--# Uncomment if you are specifically targeting less enabled mobile browsers
--#= stylesheet_link_tag 'handheld', :media => 'handheld'
-
-= ajaxful_rating_style  
+- cache_for_current_user(:layout_stylesheets) do
+  = stylesheet_link_tag 'ajaxful_rating', :media => 'screen'
+  = stylesheet_link_tag 'style', :media => 'all'
   
--# Append your own using content_for :stylesheets
-= yield :stylesheets
+  -# Uncomment if you are specifically targeting less enabled mobile browsers
+  -#= stylesheet_link_tag 'handheld', :media => 'handheld'
+    
+  -# Append your own using content_for :stylesheets
+  = yield :stylesheets
+  

@@ -7,18 +7,21 @@
     %th Order Count
     %th 
   - for meal in @meals
-    %tr
-      %td= link_to_rsrc meal
-      - if meal.restaurant
-        %td= link_to_rsrc meal.restaurant 
-        %td.td_3.ratings= ratings_for meal.restaurant, :static, :size => 'medium'
+    - cache([meal, :table_row]) do
+      %tr
+        %td= link_to_rsrc meal
+        - if meal.restaurant
+          %td= link_to_rsrc meal.restaurant 
+          %td.td_3.ratings
+            - cache([meal.restaurant, 'ratings_for', :all, :medium]) do
+              = ratings_for meal.restaurant, :static, :size => 'medium'
+          %td
+            = last_ordered_ago(meal.restaurant)
+        - else
+          %td.ghost &mdash;
+          %td       &nbsp;
+          %td       &nbsp;
+          
         %td
-          = last_ordered_ago(meal.restaurant)
-      - else
-        %td.ghost &mdash;
-        %td       &nbsp;
-        %td       &nbsp;
-        
-      %td
-        = link_to 'View orders', meal
-        -# == (#{meal.orders.count})
+          = link_to 'View orders', meal
+          -# == (#{meal.orders.count})

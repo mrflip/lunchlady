@@ -7,7 +7,7 @@
   .span{ :style => 'font-size: 1.5em; color: #955; font-style: italic; margin-bottom: 1em;' }
     Ordering is complete -- see the lunchmeister to plead for grace.
   .order
-    == You ordered #{@order.description} for #{@order.price}
+    == #{@order.user.name} ordered #{@order.description} for #{@order.price}
     = if(@order.copay)    then "(copay: #{@order.copay})" ; end
     = if(@order.guest_of) then "(guest of: #{@order.guest_of})" ; end
     == from #{@meal.restaurant_name} on #{link_to_rsrc @meal}    

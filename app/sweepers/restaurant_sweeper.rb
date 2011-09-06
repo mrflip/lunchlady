@@ -18,7 +18,6 @@ class RestaurantSweeper < ActionController::Caching::Sweeper
   end
 
   def expire_cache_for(restaurant)
-    expire_fragment([restaurant, 'previous_orders', current_user.id])
   end
 end
 

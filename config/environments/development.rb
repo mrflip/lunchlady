@@ -15,7 +15,7 @@ Lunchlady::Application.configure do
   config.action_controller.perform_caching = false
 
   # mimic production caching
-  if true
+  if false
     config.action_controller.perform_caching = true
     config.cache_store = :dalli_store
   end

@@ -1,4 +1,4 @@
-- cache([restaurant, 'new_order_for_restaurant']) do
+- cache([@meal, @meal.restaurant, 'new_order_for_restaurant']) do
   = form_for @meal do |f|
     %fieldset
       = f.error_messages

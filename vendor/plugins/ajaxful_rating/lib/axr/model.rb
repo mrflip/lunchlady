@@ -18,9 +18,9 @@ module AjaxfulRating # :nodoc:
     #     ajaxful_rateable :stars => 10, :cache_column => :custom_column
     #   end
     def ajaxful_rateable(options = {})
-      has_many :rates_without_dimension, :as => :rateable, :class_name => 'Rate',
-        :dependent => :destroy, :conditions => {:dimension => nil}
-      has_many :raters_without_dimension, :through => :rates_without_dimension, :source => :rater
+      has_many :rates, :as => :rateable, :class_name => 'Rate',
+        :dependent => :destroy, :conditions => {'rates.dimension' => nil}
+      has_many :raters, :through => :rates, :source => :rater
 
       options[:dimensions].each do |dimension|
         has_many "#{dimension}_rates", :dependent => :destroy,
@@ -106,7 +106,7 @@ module AjaxfulRating # :nodoc:
     # passed dimension.
     #
     # It may works as an alias for +dimension_raters+ methods.
-    def raters(dimension = nil)
+    def raters_for(dimension = nil)
       sql = "SELECT DISTINCT u.* FROM #{self.class.user_class.table_name} u "\
         "INNER JOIN rates r ON u.id = r.rater_id WHERE "
 
@@ -114,7 +114,6 @@ module AjaxfulRating # :nodoc:
           :rateable_id   => id,
           :rateable_type => self.class.base_class.name,
           :dimension     => (dimension.to_s if dimension),
-          'u.is_local'   => true,
       }, 'r')
 
       self.class.user_class.find_by_sql(sql)
@@ -122,7 +121,7 @@ module AjaxfulRating # :nodoc:
 
     # Finds the rate made by the user if he/she has already voted.
     def rate_by(user, dimension = nil)
-      rates(dimension).find_by_rater_id(user.id)
+      rates_for(dimension).find_by_rater_id(user.id)
     end
 
     # Return true if the user has rated the object, otherwise false
@@ -139,12 +138,12 @@ module AjaxfulRating # :nodoc:
 
     # Instance's total rates.
     def total_rates(dimension = nil)
-      rates(dimension).size
+      rates_for(dimension).count
     end
 
     # Total sum of the rates.
     def rates_sum(dimension = nil)
-      rates(dimension).sum(:stars)
+      rates_for(dimension).sum(:stars)
     end
 
     # Rating average for the object.
@@ -163,11 +162,11 @@ module AjaxfulRating # :nodoc:
     # for the dimension passed.
     #
     # It may works as an alias for +dimension_rates+ methods.
-    def rates(dimension = nil)
-      unless dimension.blank?
+    def rates_for(dimension = nil)
+      if dimension.present?
         send("#{dimension}_rates")
       else
-        rates_without_dimension.joins(:rater) & User.local
+        rates
       end
     end
 
@@ -257,7 +256,7 @@ module AjaxfulRating # :nodoc:
     # Returns the name of the cache column for the passed dimension.
     def caching_column_name(dimension = nil)
       name = axr_config[:cache_column].to_s
-      name += "_#{dimension.to_s.underscore}" unless dimension.blank?
+      name += "_#{dimension.to_s.underscore}" if dimension.present?
       name
     end
   end

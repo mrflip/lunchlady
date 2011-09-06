@@ -82,6 +82,7 @@ module AjaxfulRating # :nodoc:
       end
       rate.stars = stars
       rate.save!
+      self.updated_at = Time.now
       self.update_cached_average(dimension)
     end
 

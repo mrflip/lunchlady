@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/koppen/hassle.git
+  revision: bb49cd8b37f5369d08398897caf1b687eaa80458
+  specs:
+    hassle (0.0.1)
+      haml
+      rack
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -60,9 +68,6 @@ GEM
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
-    hassle3 (0.0.2)
-      haml
-      rack
     hirb (0.5.0)
     html5-boilerplate (1.0.0)
       compass (>= 0.11.1)
@@ -166,7 +171,7 @@ DEPENDENCIES
   friendly_id (~> 3.3.0)
   haml (~> 3.0)
   haml-rails (~> 0.3.4)
-  hassle3 (~> 0.0.2)
+  hassle!
   hirb
   html5-boilerplate (~> 1.0.0)
   nifty-generators (~> 0.4.6)

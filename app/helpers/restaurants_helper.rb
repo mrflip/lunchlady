@@ -16,6 +16,11 @@ module RestaurantsHelper
     "#{time_ago_in_words(ordered_on_date)} ago"
   end
 
+  def timeliness_selector_text(restaurants)
+    restaurants.sort_by(&:timeliness_or_average).
+      map{|r| [ [r.timeliness_str, r.name].join(' '), r.id ] }
+  end
+
   def restaurant_dump(restaurant)
     [
       "%-15s" % [ restaurant.name.to_s[0..14] ],

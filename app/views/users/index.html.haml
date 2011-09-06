@@ -9,14 +9,16 @@
 %table.users.horizontal
   %tr
     %th &nbsp;
-    %th= link_to 'Name', users_path(:order => 'name')
+    %th= link_to 'Name',       users_path(:order => 'name')
     %th  Email
-    %th= link_to 'Is Local', users_path(:order => 'usage')
+    %th= link_to 'Hungriness', users_path(:order => 'hungriness')
+    %th= link_to 'Is Local',   users_path(:order => 'usage')
   - for user in @users
     %tr.hcard
       %td.photo=        image_tag avatar_url(user)
       %td.fn.n=         link_to_rsrc user
       %td.email=        user.email
+      %td.hungriness=   user.orders.count
       %td.local=        user.is_local
 
 .buttons

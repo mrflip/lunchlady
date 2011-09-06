@@ -13,7 +13,7 @@
 
 .meal
   - if user_signed_in?
-    - @order = @meal.orders.for_user(current_user).first || @meal.orders.build(:user_id => current_user.id)
+    - @order = @meal.order_for_user(current_user)
     = render :partial => '/orders/form', :locals => { :freeze_user_id => true, :hide_link_to_meal => true }
 
 %hr/

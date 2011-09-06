@@ -8,10 +8,12 @@ class RestaurantsController < ApplicationController
     when 'my_rating'  then @restaurants = Restaurant.by_user_rating(current_user.id)
     when 'all_rating' then @restaurants = Restaurant.by_all_rating
     when 'name'       then @restaurants = Restaurant.alphabetically
-    when 'price'      then @restaurants = Restaurant.all.sort_by{|r| -(r.avg_price || 0) }
-    when 'ago'        then @restaurants = Restaurant.all.sort_by{|r| -(r.days_since_last_ordered || 0) }
+    when 'price'      then @restaurants = Restaurant.by_avg_price
+    when 'ago'        then @restaurants = Restaurant.by_last_ordered
     when 'freq'       then @restaurants = Restaurant.all.sort_by{|r| -(r.frequency || 0) }
-    when 'timeliness' then @restaurants = Restaurant.by_timeliness
+    when 'timeliness' then @restaurants = Restaurant.all.sort_by{|r| r.timeliness_or_average }
+    when 'loves'      then @restaurants = Restaurant.by_love_count.all
+    when 'hates'      then @restaurants = Restaurant.by_hate_count.all
     else                   @restaurants = Restaurant.by_all_rating
     end
   end
@@ -79,6 +81,7 @@ private
   end
 
   def ensure_current_slug_url
+    return if params[:id] == @restaurant.cached_slug
     redirect_to @restaurant, :status => :moved_permanently unless @restaurant.friendly_id_status.best?
   end
 end

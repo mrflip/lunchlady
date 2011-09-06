@@ -3,13 +3,12 @@ class MealsController < ApplicationController
   before_filter :find_from_params, :only => [:show, :edit, :done, :update, :destroy]
 
   def index
-    @meals = Meal.by_recency
+    @meals = Meal.by_recency.includes(:restaurant)
   end
 
   def show
     if @meal.restaurant
-      @users  = User.orderers_for(@meal)
-      @orders = @users.map{|user| @meal.orders.for_user(user).first || @meal.orders.build(:user_id => user.id) }
+      @orders = @meal.expected_orders
       render :action => 'show'
     else
       render :action => 'edit'
@@ -56,6 +55,6 @@ class MealsController < ApplicationController
 private
 
   def find_from_params
-    @meal = Meal.for_date(params[:id])
+    @meal = Meal.includes(:orders).for_date( params[:id].gsub(/[^\w\-\:]+/, " ") )
   end
 end

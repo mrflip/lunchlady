@@ -7,18 +7,28 @@ class Restaurant < ActiveRecord::Base
   has_many :meals
   has_many :orders, :through => :meals
 
-  scope :alphabetically, order("restaurants.name ASC")
-  scope :by_all_rating,  order('restaurants.rating_average DESC')
-  scope :by_user_rating, lambda{|u| includes('rates').where('rates.rater_id' => u).order('rates.stars DESC') }
-  #
   # Plugins
-  #
-  has_friendly_id :name, :use_slug => true
+  has_friendly_id :name, :use_slug => true, :cache_column => :cached_slug, :reserved_words => %w[rate rating edit new dump]
   ajaxful_rateable :stars => 5
 
   #
+  # Scopes
+  #
+
+  scope :alphabetically,    order("restaurants.name ASC")
+  scope :by_all_rating,     order('restaurants.rating_average DESC')
+  scope :by_user_rating,    lambda{|u| includes('rates').where('rates.rater_id' => u).order('rates.stars DESC') }
+
+  scope :with_local_raters, joins(:raters).merge(User.local)
+  scope :by_love_count,     with_local_raters.group(:rateable_id).order('sum(rates.stars = 5) DESC')
+  scope :by_hate_count,     with_local_raters.group(:rateable_id).order('sum(rates.stars = 1) DESC')
+
+  scope :by_last_ordered,   includes(:meals ).group('restaurants.id').order('MAX(meals.ordered_on) DESC, restaurants.id ASC').joins(:meals)
+  scope :by_avg_price,      includes(:orders).group('restaurants.id').order('AVG(orders.price)     DESC, restaurants.id ASC').joins(:orders)
+  #
   # Methods
   #
+
   def titleize
     name
   end
@@ -50,31 +60,38 @@ class Restaurant < ActiveRecord::Base
     meals.where("ordered_on > ?", since.days.ago).count
   end
 
-  class_attribute :exp_rate_yint  ; self.exp_rate_yint  = 3.0
+  RATING_THRESHOLD = 3.0
+
+  class_attribute :exp_rate_yint  ; self.exp_rate_yint  = RATING_THRESHOLD
   class_attribute :exp_rate_slope ; self.exp_rate_slope = 1.8
+
+  def uncool?
+    ((raters.count >= 3) && (rate_average <= (0.9 * RATING_THRESHOLD)))
+  end
+  def self.awesome
+    includes(:rates).all.reject(&:uncool?)
+  end
 
   # from a fit to observed values of how often ordered vs. rating
   def expected_rate
-    exp_rate_slope * (rate_average + (0.25*(lovers.count-haters.count)) - exp_rate_yint)
+    exp_rate_slope * (rate_average + (0.25*(lovers.count-haters.count)) - RATING_THRESHOLD)
   end
 
   def timeliness
-    return if (name =~ /franklin.s/i) || (raters.count <= 1) || (rate_average <= exp_rate_yint)
+    return @timeliness if @timeliness
+    return if (name =~ /franklin.s/i) || (raters.count <= 1) || (rate_average <= RATING_THRESHOLD)
     rate_t90d = meals_count_since(90) / 3.0
     rate_t90d = 0.5 if rate_t90d < 0.5
-    expected_rate / rate_t90d
+    @timeliness = expected_rate / rate_t90d
   end
   def timeliness_str()  timeliness ? timeliness.round.to_s : '' ; end
+  def timeliness_or_average() [ -(timeliness||0), rate_average] ; end
 
-  def self.by_timeliness
-    all.sort_by{|r| [- (r.timeliness||0), r.rate_average] }
-  end
-
-  def lovers()      rates.joins(:rater).where('stars = 5') & User.local    ; end
+  def lovers()      rates.with_local_rater.where('stars = 5')   ; end
   def lover_names() lovers.map(&:rater).compact.map(&:titleize).join(', ') ; end
   def loves()       lovers.present? ? lovers.count : ''  ; end
 
-  def haters()      rates.joins(:rater).where('stars = 1') & User.local    ; end
+  def haters()      rates.with_local_rater.where('stars = 1')    ; end
   def hater_names() haters.map(&:rater).compact.map(&:titleize).join(', ') ; end
   def hates()       haters.present? ? haters.count : ''  ; end
 
@@ -82,7 +99,7 @@ class Restaurant < ActiveRecord::Base
   # * given user's orders first, most recent first;
   # * then other users' orders, most recent first
   def previous_order_descriptions(user)
-    prev_orders   = orders.joins(:user).sort_by_user(user) & User.local
+    prev_orders   = orders.includes(:user).sort_by_user(user).merge(User.local)
     descriptions  = [['', '--previous orders--', '']]
     descriptions += prev_orders.map{|o| [o.user.short_name, o.description[0..100].gsub(/[\r\n\t]+/, ' ').strip, "%.2f"%o.price].to_json }
     descriptions.uniq

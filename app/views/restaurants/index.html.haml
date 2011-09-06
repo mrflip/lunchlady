@@ -2,7 +2,8 @@
 
 .right
   %p.clear
-    Note: Global ratings aren't updated til you reload. Sorry bout that
+    Note: Global ratings aren't updated til you reload. <br/>
+    A restaurant is Uncool if it rates below #{0.9 * Restaurant::RATING_THRESHOLD} stars (with at least 3 votes)
 
   %hr/  
 
@@ -11,31 +12,31 @@
     %th.td_7=           link_to('Name', restaurants_path( :order => 'name'))
     %th.td_3            Phone      
     %th.td_4            Links      
+    %th.td_1=           link_to("\#/mo", restaurants_path( :order => 'freq'))
     %th.td_1=           link_to('due',  restaurants_path( :order => 'timeliness'))
-    %th.td_1=           link_to('freq', restaurants_path( :order => 'freq'))
-    %th.td_char         <span title="love">&#x2764;</span>
-    %th.td_char         <span title="hate">&#x2620;</span>
+    %th.td_char=        link_to(raw("&\#x2764;"), restaurants_path( :order => 'loves'), :title => 'love')
+    %th.td_char=        link_to(raw("&\#x2620;"), restaurants_path( :order => 'hates'), :title => 'hate')
+    - if params[:show_price].to_s == 'true'
+      %th.td_1=         link_to("$$$", restaurants_path( :order => 'price'))
     %th.td_3=           link_to('Your Rating', restaurants_path( :order => 'my_rating'))
     %th.td_3
       %span= link_to('Overall Rating', restaurants_path( :order => 'all_rating'))
       %span.right#show_rating_details <a href="#">&raquo;</a>
     %th.rating_details{ :style => 'display:none' } details
   - for restaurant in @restaurants
-    %tr
+    %tr.restaurant{ :class => [(restaurant.uncool? ? 'uncool' : nil)].join(' ') }
       %td=              link_to_rsrc restaurant
       %td.phone=        restaurant.phone
       %td.url=          restaurant_links(restaurant)
+      %td.frequency=    restaurant.frequency  ? ("%.1f" % restaurant.frequency) : ''
       %td.due=          restaurant.timeliness_str
-      %td.frequency=    restaurant.frequency  ? ("%7.1f" % restaurant.frequency) : ''
-      %td.love
-        %span{ :title => restaurant.lover_names }= restaurant.loves
-      %td.hate
-        %span{ :title => restaurant.hater_names }= restaurant.hates
+      %td.love          <span title="#{restaurant.lover_names}">#{restaurant.loves}</span>
+      %td.hate          <span title="#{restaurant.hater_names}">#{restaurant.hates}</span>
+      - if params[:show_price].to_s == 'true'
+        %td.price=      restaurant.avg_price && number_to_currency(restaurant.avg_price)
       %td.ratings=      ratings_for restaurant, :show_user_rating => true
       %td.ratings=      ratings_for restaurant, :static
       %td.rating_details{ :style => 'display:none' }
-        -# = restaurant.avg_price && number_to_currency(restaurant.avg_price)
-        -# %br/
         - restaurant.rates.order('stars DESC').each do |rating|
           %span{ :title => rating.rater.name }= rating.stars
 

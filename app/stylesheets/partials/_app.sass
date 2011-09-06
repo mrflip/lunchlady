@@ -29,9 +29,11 @@
       &.ratings                     
         padding-top:            0px   
         padding-bottom:         0px   
-  .user                             
-    .photo, .empty                  
-      border:                   none  
+  .photo, .empty                  
+    border:                   none
+    img
+      width:                    32px
+      height:                   32px
 
   table.restaurants
     th a
@@ -40,6 +42,13 @@
       white-space:              nowrap
     .rating_details
       font-size:                10px
+  .restaurant
+    &.uncool
+      .ratings
+        opacity:                0.35
+      color:                    #ccc
+      a
+        color:                  #ccc
 
 .td_char
   width:                        20px

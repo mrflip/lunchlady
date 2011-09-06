@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  attr_accessible :user_id, :meal_id, :description, :price, :copay, :guest_of
+  attr_accessible :user, :user_id, :meal_id, :description, :price, :copay, :guest_of
   belongs_to :user
   belongs_to :meal
   has_one    :restaurant, :through => :meal
@@ -11,7 +11,8 @@ class Order < ActiveRecord::Base
 
   scope :for_user,      lambda{|u| where('user_id = ?', (u.respond_to?(:id) ? u.id : u.to_i) ) }
   scope :for_meal,      lambda{|m| where('meal_id = ?', m.id) }
-  scope :recent_first,  lambda{ includes('meal').order('meals.ordered_on DESC') }
+  scope :for_date,      lambda{|d| joins(:meal).where('meals.ordered_on = ?', d) }
+  scope :recent_first,  lambda{    includes('meal').order('meals.ordered_on DESC') }
 
   scope :sort_by_user,  lambda{|u| order("(orders.user_id = #{u.id}) DESC, orders.user_id ASC, orders.created_at DESC") }
 

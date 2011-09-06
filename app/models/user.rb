@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   #
 
   def self.orderers_for meal
-    [local.by_id, all(:joins => :orders, :conditions => ['orders.meal_id = ?', meal.id])].flatten.uniq
+    includes(:orders).group('users.id').where('(orders.meal_id = ?) OR (users.is_local = ?)', meal.id, true).order('users.id')
   end
 
   def past_orders_for restaurant

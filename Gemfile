@@ -18,6 +18,8 @@ gem    'will_paginate',        "~> 3.0.0"   # Pagination of long lists
 gem    'devise',               "~> 1.1"     # User management
 gem    'hassle',               :git => 'git://github.com/koppen/hassle.git'
 
+gem    'dalli'
+
 # group  'test' do
 #   gem  'rspec',                "~> 2.6.0"
 #   gem  'rspec-rails',          "~> 2.6.0"

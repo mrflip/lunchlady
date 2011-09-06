@@ -19,12 +19,13 @@ class Restaurant < ActiveRecord::Base
   scope :by_all_rating,     order('restaurants.rating_average DESC')
   scope :by_user_rating,    lambda{|u| includes('rates').where('rates.rater_id' => u).order('rates.stars DESC') }
 
-  scope :with_local_raters, joins(:raters).merge(User.local)
-  scope :by_love_count,     with_local_raters.group(:rateable_id).order('sum(rates.stars = 5) DESC')
-  scope :by_hate_count,     with_local_raters.group(:rateable_id).order('sum(rates.stars = 1) DESC')
+  scope :with_local_raters,   joins(:raters).merge(User.local)
+  scope :group_by_restaurant, lambda{ group(([:id] + Restaurant.new.attributes.keys).map{|k| "restaurants.#{k}" }.join(",")) }
+  scope :by_love_count,       with_local_raters.group_by_restaurant.order('COUNT(rates.stars = 5) DESC')
+  scope :by_hate_count,       with_local_raters.group_by_restaurant.order('COUNT(rates.stars = 1) DESC')
 
-  scope :by_last_ordered,   includes(:meals ).group('restaurants.id').order('MAX(meals.ordered_on) DESC, restaurants.id ASC').joins(:meals)
-  scope :by_avg_price,      includes(:orders).group('restaurants.id').order('AVG(orders.price)     DESC, restaurants.id ASC').joins(:orders)
+  scope :by_last_ordered,   includes(:meals ).group_by_restaurant.order('MAX(meals.ordered_on) DESC, restaurants.id ASC').joins(:meals)
+  scope :by_avg_price,      includes(:orders).group_by_restaurant.order('AVG(orders.price)     DESC, restaurants.id ASC').joins(:orders)
   #
   # Methods
   #

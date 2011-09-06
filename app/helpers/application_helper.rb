@@ -15,6 +15,11 @@
      content_for(:description){ text }
    end
 
+   def cache_for_current_user(*args, &block)
+     args << (current_user ? current_user.id : :logged_out)
+     cache(args.flatten, &block)
+   end
+
    #
    # Link to a resource by its titleized text
    #

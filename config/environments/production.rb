@@ -24,9 +24,9 @@ Lunchlady::Application.configure do
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new
 
-  ActiveRecord::Base.logger = Rails.heroku_stdout_logger if Rails.respond_to?(:heroku_stdout_logger)
-
-  Rails.logger.debug( [ Rails.logger, ActiveRecord::Base.logger, Rails.logger.level ])
+  # ActiveRecord::Base.logger = Rails.heroku_stdout_logger if Rails.respond_to?(:heroku_stdout_logger)
+  #
+  # Rails.logger.debug( [ __FILE__, Rails.logger, ActiveRecord::Base.logger, Rails.logger.level ])
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store

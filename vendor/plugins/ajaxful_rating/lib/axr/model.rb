@@ -115,6 +115,7 @@ module AjaxfulRating # :nodoc:
           :rateable_id   => id,
           :rateable_type => self.class.base_class.name,
           :dimension     => (dimension.to_s if dimension),
+
       }, 'r')
 
       self.class.user_class.find_by_sql(sql)
@@ -167,7 +168,7 @@ module AjaxfulRating # :nodoc:
       if dimension.present?
         send("#{dimension}_rates")
       else
-        rates
+        rates.includes(:rater).merge(User.local)
       end
     end
 

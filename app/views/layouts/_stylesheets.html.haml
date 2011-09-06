@@ -1,6 +1,8 @@
-- cache_for_current_user(:layout_stylesheets) do
-  = stylesheet_link_tag 'ajaxful_rating', :media => 'screen'
+- cache_for_current_user(:layout_stylesheet) do
   = stylesheet_link_tag 'style', :media => 'all'
+  = stylesheet_link_tag 'ajaxful_rating', :media => 'screen'
+  
+  -# = ajaxful_rating_style  
   
   -# Uncomment if you are specifically targeting less enabled mobile browsers
   -#= stylesheet_link_tag 'handheld', :media => 'handheld'

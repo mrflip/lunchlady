@@ -1,6 +1,9 @@
 !!! 5
 -ie_html :class => 'no-js' do
   = render :partial => 'layouts/head'
+  = render :partial => 'layouts/stylesheets'
+  = javascript_include_tag 'modernizr.min'
+  = csrf_meta_tag
   %body{ :lang => 'en', :class => "#{controller.controller_name}" }
     #container
       %header#header

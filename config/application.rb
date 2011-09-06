@@ -48,6 +48,6 @@ module Lunchlady
     config.active_record.timestamped_migrations = false
 
     # Rotate log files (50 files max at 1MB each)
-    config.logger = Logger.new(config.paths.log.first, 50, 1048576)
+    config.logger = Logger.new(config.paths.log.first, 50, 20 * 1048576)
   end
 end

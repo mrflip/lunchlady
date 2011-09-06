@@ -24,7 +24,7 @@
       %span.right#show_rating_details <a href="#">&raquo;</a>
     %th.rating_details{ :style => 'display:none' } details
   - for restaurant in @restaurants
-    - cache_for_current_user(restaurant, 'table_row') do
+    - cache_for_current_user(restaurant, 'table_row', params[:show_price]) do
       %tr.restaurant{ :class => [(restaurant.uncool? ? 'uncool' : nil)].join(' ') }
         %td=              link_to_rsrc restaurant
         %td.phone=        restaurant.phone

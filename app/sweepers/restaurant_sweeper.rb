@@ -18,7 +18,7 @@ class RestaurantSweeper < ActionController::Caching::Sweeper
   end
 
   def expire_cache_for(restaurant)
-    expire_fragment('restaurant_selector')
+    expire_fragment(restaurant, 'restaurant_selector')
   end
 end
 

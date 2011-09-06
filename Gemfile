@@ -32,8 +32,8 @@ gem    'hassle',               :git => 'git://github.com/koppen/hassle.git'
 group  'development' do
   gem  'nifty-generators',     "~> 0.4.6"   # Much better scaffolding
   gem  'taps',                 "~> 0.3.23"  # Teleportation of databases
-  gem  'ruby-debug19',         "~> 0.11.6",         :platforms => [:ruby_19]
-  gem  'ruby-debug',           :platforms => [:ruby_18]
+  # gem  'ruby-debug19',         "~> 0.11.6",         :platforms => [:ruby_19]
+  # gem  'ruby-debug',           :platforms => [:ruby_18]
   gem  'annotate',             "~> 2.4.0"
   gem  'pry'
 end

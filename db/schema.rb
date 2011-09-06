@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(:version => 11) do
     t.timestamp "updated_at"
   end
 
-  add_index "rates", ["rateable_id", "rateable_type", "dimension"], :name => "index_rates_on_rateable_id_and_rateable_type_and_dimension"
-  add_index "rates", ["rater_id"], :name => "index_rates_on_rater_id"
+  add_index "rates", ["rateable_id", "rateable_type", "dimension", "stars"], :name => "index_rates_on_rateable_and_so_forth"
+  add_index "rates", ["rater_id", "rateable_id", "rateable_type", "dimension"], :name => "index_rates_on_rater_and_so_forth"
   add_index "rates", ["stars"], :name => "index_rates_on_stars"
 
   create_table "restaurants", :force => true do |t|

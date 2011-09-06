@@ -25,7 +25,7 @@ Lunchlady::Application.configure do
   # config.logger = SyslogLogger.new
 
   # Use a different cache store in production
-  config.cache_store = :dalli_store, { :expires_in => 1.hours }
+  config.cache_store = :dalli_store, { :expires_in => 1.hours, :namespace => '20110906-0656' }
 
   # Enable Rails's static asset server for heroku
   config.serve_static_assets = true

@@ -15,17 +15,15 @@ class Restaurant < ActiveRecord::Base
   # Scopes
   #
 
-  scope :alphabetically,    order("restaurants.name ASC")
-  scope :by_all_rating,     order('restaurants.rating_average DESC')
-  scope :by_user_rating,    lambda{|u| includes('rates').where('rates.rater_id' => u).order('rates.stars DESC') }
+  scope :alphabetically,      order("restaurants.name ASC")
+  scope :by_all_rating,       order('restaurants.rating_average DESC')
+  scope :by_user_rating,      lambda{|u| includes('rates').where('rates.rater_id' => u).order('rates.stars DESC') }
 
   scope :with_local_raters,   includes(:raters).merge(User.local)
   scope :group_by_restaurant, lambda{ group(([:id] + Restaurant.new.attributes.keys).map{|k| "restaurants.#{k}" }.join(",")) }
-  scope :by_love_count,       with_local_raters.group_by_restaurant.order('(COUNT(*) - COUNT(NULLIF(rates.stars, 5))) DESC')
-  scope :by_hate_count,       with_local_raters.group_by_restaurant.order('(COUNT(*) - COUNT(NULLIF(rates.stars, 1))) DESC')
 
-  scope :by_last_ordered,     includes(:meals ).group_by_restaurant.order('MAX(meals.ordered_on) DESC, restaurants.id ASC').joins(:meals)
-  scope :by_avg_price,        includes(:orders).group_by_restaurant.order('AVG(orders.price)     DESC, restaurants.id ASC').joins(:orders)
+  scope :by_last_ordered,     includes(:meals ).group_by_restaurant.order('MAX(meals.ordered_on) DESC, restaurants.id ASC').includes(:meals)
+  scope :by_avg_price,        includes(:orders).group_by_restaurant.order('AVG(orders.price)     DESC, restaurants.id ASC').includes(:orders)
   #
   # Methods
   #
@@ -96,6 +94,26 @@ class Restaurant < ActiveRecord::Base
   def hater_names() haters.map(&:rater).compact.map(&:titleize).join(', ') ; end
   def hates()       haters.present? ? haters.count : ''  ; end
 
+  #
+  # You may ask yourself, where is my beautiful home?
+  # And you may ask yourself, why didn't he use SQL here?
+  # Because Postgres is a shitheel, that's why.
+  #
+  #   Restaurant.includes(:raters).group('restaurants.id').merge(User.local).order('SUM(stars = 5) DESC')
+  #
+  # Maybe you can get something else readable, performant, sorts using only
+  # votes from local users, and doesn't discard unrated restaurants, AND that
+  # also works on postgres, but I am too dumb to do so.
+  #
+
+  def self.by_love_count
+    includes(:raters).all.sort_by{|rest| -(rest.rates.select{|r| r.stars == 5 && r.rater.is_local? }.count) }
+  end
+
+  def self.by_hate_count
+    includes(:raters).all.sort_by{|rest| -(rest.rates.select{|r| r.stars == 1 && r.rater.is_local? }.count) }
+  end
+
   # Find previous orders from this restaurant;
   # * given user's orders first, most recent first;
   # * then other users' orders, most recent first
@@ -105,6 +123,7 @@ class Restaurant < ActiveRecord::Base
     descriptions += prev_orders.map{|o| [o.user.short_name, o.description[0..100].gsub(/[\r\n\t]+/, ' ').strip, "%.2f"%o.price].to_json }
     descriptions.uniq
   end
+
 end
 
 # == Schema Information

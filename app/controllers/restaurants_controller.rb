@@ -13,8 +13,8 @@ class RestaurantsController < ApplicationController
     when 'ago'        then @restaurants = Restaurant.by_last_ordered
     when 'freq'       then @restaurants = Restaurant.all.sort_by{|r| -(r.frequency || 0) }
     when 'timeliness' then @restaurants = Restaurant.all.sort_by{|r| r.timeliness_or_average }
-    when 'loves'      then @restaurants = Restaurant.by_love_count.all
-    when 'hates'      then @restaurants = Restaurant.by_hate_count.all
+    when 'loves'      then @restaurants = Restaurant.by_love_count
+    when 'hates'      then @restaurants = Restaurant.by_hate_count
     else                   @restaurants = Restaurant.by_all_rating
     end
   end

@@ -22,8 +22,8 @@ class Restaurant < ActiveRecord::Base
   scope :with_local_raters,   includes(:raters).merge(User.local)
   scope :group_by_restaurant, lambda{ group(([:id] + Restaurant.new.attributes.keys).map{|k| "restaurants.#{k}" }.join(",")) }
 
-  scope :by_last_ordered,     includes(:meals ).group_by_restaurant.order('MAX(meals.ordered_on) DESC, restaurants.id ASC').includes(:meals)
-  scope :by_avg_price,        includes(:orders).group_by_restaurant.order('AVG(orders.price)     DESC, restaurants.id ASC').includes(:orders)
+  scope :by_last_ordered,     includes(:meals ).group_by_restaurant.order('MAX(meals.ordered_on) DESC, restaurants.id ASC')
+  scope :by_avg_price,        includes(:orders).group_by_restaurant.order('AVG(orders.price)     DESC, restaurants.id ASC')
   #
   # Methods
   #

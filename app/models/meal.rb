@@ -31,6 +31,14 @@ class Meal < ActiveRecord::Base
     for_date(Date.today)
   end
 
+  def next_meal
+    Meal.for_date(ordered_on + 1)
+  end
+
+  def prev_meal
+    Meal.for_date(ordered_on - 1)
+  end
+
   def self.upcoming
     where(['ordered_on BETWEEN ? AND ?', 3.days.ago, 14.days.from_now]).order('ordered_on ASC')
   end

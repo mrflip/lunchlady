@@ -15,7 +15,9 @@
   = form_for [@meal, @order] do |f|
     %fieldset.order
       = f.error_messages
-      %legend== Order#{orderer_str} from #{@meal.restaurant_name} on #{link_to_rsrc @meal}
+      %legend{ :style => 'width: 90%' }
+        == Order#{orderer_str} from #{@meal.restaurant_name} on #{link_to_rsrc @meal}
+        - prev_next(@meal)
       - if freeze_user_id
         = f.hidden_field   :user_id
       - else

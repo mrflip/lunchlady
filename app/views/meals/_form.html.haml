@@ -1,7 +1,9 @@
 = form_for @meal do |f|
   %fieldset
     = f.error_messages
-    %legend= @title
+    %legend{ :style => 'width: 90%' }
+      = @title
+      - prev_next(@meal)
     .form_input
       = f.label :restaurant_id
       - cache([@meal.restaurant, 'restaurant_selector']) do

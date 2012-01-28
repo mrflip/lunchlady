@@ -16,7 +16,7 @@ gem    'friendly_id',          "~> 3.3.0"     # Human readable URLs
 gem    'validates_existence',  "~> 0.5"     # Validation of associations
 gem    'chronic',              "~> 0.6.1"   # Time parsing
 gem    'will_paginate',        "~> 3.0.0"   # Pagination of long lists
-gem    'devise',               "~> 1.1"     # User management
+gem    'devise',               "~> 1.4"     # User management
 # gem    'hassle',               :git => 'git://github.com/koppen/hassle.git'
 
 gem    'dalli'

@@ -23,7 +23,7 @@
   %tr
     %th.td_8    Restaurant
     %th.td_17   Rating
-  - @user.rates.includes(:rateable).sort_by{|r| r.rateable.titleize }.each do |rating|
+  - @user.rates.includes(:rateable).sort_by{|r| [ -r.stars.to_i, r.rateable.titleize ] }.each do |rating|
     %tr
       %td= rating.rateable.titleize
       %td= rating.stars

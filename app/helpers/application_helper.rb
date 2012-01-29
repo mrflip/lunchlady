@@ -1,8 +1,8 @@
  module ApplicationHelper
 
    # Help individual pages to set their HTML titles
-   def title(text)
-     @title = text
+   def title(text, prefix='LL: ')
+     @title = (prefix.to_s + text)
    end
 
    # This template will handle its own rows

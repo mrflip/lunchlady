@@ -63,29 +63,31 @@ class Restaurant < ActiveRecord::Base
     meals.where("ordered_on > ?", since.days.ago).count
   end
 
-  RATING_THRESHOLD = 3.0
+  RATING_THRESHOLD = 2.7
 
-  class_attribute :exp_rate_yint  ; self.exp_rate_yint  = RATING_THRESHOLD
-  class_attribute :exp_rate_slope ; self.exp_rate_slope = 1.8
+  class_attribute :exp_freq_yint  ; self.exp_freq_yint  = RATING_THRESHOLD
+  class_attribute :exp_freq_slope ; self.exp_freq_slope = 1.8
 
   def uncool?
-    ((raters.count >= 3) && (rate_average <= (0.9 * RATING_THRESHOLD)))
+    ((raters.local.count >= 4) && (rate_average <= (RATING_THRESHOLD)))
   end
   def self.awesome
     includes(:rates).all.reject(&:uncool?)
   end
 
   # from a fit to observed values of how often ordered vs. rating
-  def expected_rate
-    exp_rate_slope * (rate_average + (0.25*(lovers.count-haters.count)) - RATING_THRESHOLD)
+  def expected_freq
+    exp_freq_slope * (rate_average + (0.25*(lovers.count-haters.count)) - RATING_THRESHOLD)
   end
 
+  # Is it time to order from here?
   def timeliness
     return @timeliness if @timeliness
-    return if (name =~ /franklin.s/i) || (raters.count <= 1) || (rate_average <= RATING_THRESHOLD)
-    rate_t90d = meals_count_since(90) / 3.0
-    rate_t90d = 0.5 if rate_t90d < 0.5
-    @timeliness = expected_rate / rate_t90d
+    return if uncool?                              # .. it's never time to order from an uncool restaurant
+    return (@timeliness = 3) if meals.count < 1    # .. it might be time to go to one we've never ordered from
+    freq_t90d = meals_count_since(90) / 3.0        # get the meals per month over last three months
+    freq_t90d = 0.2 if freq_t90d < 0.2             # level everything not seen in 3 months at 1/5months
+    @timeliness = expected_freq / freq_t90d        # return ratio of expected to actual -- high means it's time to order
   end
   def timeliness_str()  timeliness ? timeliness.round.to_s : '' ; end
   def timeliness_or_average() [ -(timeliness||0), rate_average] ; end
@@ -150,4 +152,3 @@ end
 #  created_at       :datetime
 #  updated_at       :datetime
 #
-

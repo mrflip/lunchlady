@@ -12,7 +12,7 @@
         - if    user_signed_in? && order && !order.new_record?
           %td=   order.description
         - elsif user_signed_in?
-          %td=   link_to 'enter your order', new_meal_order_path(@meal, order, :user_id => order.user_id)
+          %td=   link_to 'enter your order', new_meal_order_path(meal, order, :user_id => order.user_id)
         - else
           %td
             =       link_to 'Sign in', new_user_session_path

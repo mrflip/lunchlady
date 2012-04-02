@@ -39,6 +39,7 @@ group  'development' do
   # gem  'ruby-debug',           :platforms => [:ruby_18]
   gem  'annotate',             "~> 2.4.0"
   gem  'pry'
+  gem  'heroku'
 end
 
 group  'console' do

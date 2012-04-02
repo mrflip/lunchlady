@@ -16,6 +16,7 @@ class Meal < ActiveRecord::Base
   end
 
   def order_for_user(user)
+    return nil if user.blank?
     orders.for_user(user).first || orders.build(:user => user)
   end
 
@@ -39,8 +40,8 @@ class Meal < ActiveRecord::Base
     Meal.for_date(ordered_on - 1)
   end
 
-  def self.upcoming
-    where(['ordered_on BETWEEN ? AND ?', 3.days.ago, 14.days.from_now]).order('ordered_on ASC')
+  def self.upcoming(end_days=14)
+    where(['ordered_on BETWEEN ? AND ?', 3.days.ago, end_days.days.from_now]).order('ordered_on ASC')
   end
 
   def titleize

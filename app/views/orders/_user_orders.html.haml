@@ -1,0 +1,21 @@
+%table.horizontal.orders
+  %tr
+    %th.td_5    Meal
+    %th.td_5    Restaurant
+    %th.td_14   Order
+  - meals.includes(:restaurant).select{|m| m.restaurant.present? }.each do |meal|
+    - order = meal.order_for_user(current_user)
+    - cache_for_current_user([meal, order, :user_order_table_row]) do
+      %tr
+        %td=     link_to_rsrc meal
+        %td=     link_to_rsrc meal.restaurant if meal.restaurant
+        - if    user_signed_in? && order && !order.new_record?
+          %td=   order.description
+        - elsif user_signed_in?
+          %td=   link_to 'enter your order', new_meal_order_path(@meal, order, :user_id => order.user_id)
+        - else
+          %td
+            =       link_to 'Sign in', new_user_session_path
+            == /
+            =       link_to 'Sign up', new_user_registration_path
+            to place an order

@@ -17,14 +17,12 @@
     - else
       Are you the designated lunchmeister?
       = link_to "Choose today's restaurant", edit_meal_path(@meal)
-        
+
   - else
     .buttons= link_to 'Sign in', new_user_session_path, :class => 'button'
     == or #{link_to 'Sign up', new_user_registration_path} to place an order
 
   %hr.spacer/
 
-  = render '/meals/meals', :meals => (@meals = Meal.upcoming)
-
-
-        
+  = render '/orders/user_orders', :meals => (@meals = Meal.upcoming(45))
+  -# = render '/meals/meals', :meals => (@meals = Meal.upcoming)

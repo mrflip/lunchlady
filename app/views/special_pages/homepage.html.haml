@@ -4,9 +4,12 @@
 .section
   - if user_signed_in?
     - if @meal.restaurant
-      %h2
-        = link_to "Today's Order", @meal
-        == ~~
+      %h2{ :style => 'margin: 1em 0' } Today's Order
+
+      %h3
+        Hooray!
+        = link_to "Today's Meal", @meal
+        is from 
         = link_to_rsrc @meal.restaurant
         == ~~
         = restaurant_links(@meal.restaurant)
@@ -24,5 +27,7 @@
 
   %hr.spacer/
 
+  %h2{ :style => 'margin: 1em 0' } Upcoming Meals
+  
   = render '/orders/user_orders', :meals => (@meals = Meal.upcoming(45))
   -# = render '/meals/meals', :meals => (@meals = Meal.upcoming)

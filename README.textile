@@ -141,3 +141,9 @@ h2. TODO
 * --Vote for a restaurant--
 * --How long since we last ordered from a restaurant--
 * --consensus rating--
+
+
+
+
+heroku console Rails.cache.clear --app lunchlady
+
